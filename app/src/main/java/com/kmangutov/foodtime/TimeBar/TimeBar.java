@@ -9,10 +9,14 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.ArrayList;
+
 /**
  * Created by kmangutov on 10/29/14.
  */
 public class TimeBar extends View {
+
+    ArrayList<TimeSlot> mTimeSlots;
 
     public TimeBar(Context context) {
         super(context);
@@ -23,6 +27,10 @@ public class TimeBar extends View {
     }
 
     double selection = 0.0;
+
+    protected void fractionToTime(float fraction) {
+
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
