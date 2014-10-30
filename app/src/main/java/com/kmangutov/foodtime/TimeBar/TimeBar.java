@@ -23,6 +23,7 @@ public class TimeBar extends View {
     }
 
     double selection = 0.0;
+    double release = 0.0;
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -43,9 +44,14 @@ public class TimeBar extends View {
         paint.setColor(0xFF33B5E5);
         paint.setStrokeWidth(4);
 
-        int barHeight = (int)(selection * getHeight());
-        canvas.drawRect(15, barHeight, getWidth(), getHeight(), paint);
+        int barTop = (int)(selection * getHeight());
+	int barBottom = (int)(release * getHeight());
+        canvas.drawRect(15, barTop, getWidth(), barBottom, paint);
 
+	paint.setColor(0xFF23A5D5);
+	canvas.drawText(selection, 15, barTop, paint);
+	canvas.drawText(release, 15, barBottom, paint);
+	
         this.invalidate();
     }
 
@@ -58,6 +64,12 @@ public class TimeBar extends View {
                 Log.d("MOTIONEVENT", event.getX() + "," + event.getY());
                 selection = event.getY()/getHeight();
                 System.out.println("selection: " + selection);
+		break;
+	    case MotionEvent.ACTION_UP:
+		Log.d("MOTIONEVENT", event.getX() + "," + event.getY());
+		release = event.getY()/getHeight();
+		System.out.println("release: " + release);
+		break;
         }
 
         return true;
