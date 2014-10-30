@@ -1,7 +1,8 @@
-package com.kmangutov.foodtime;
+package com.kmangutov.foodtime.TimeBar;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -28,16 +29,23 @@ public class TimeBar extends View {
         //super.onDraw(canvas);
 
         Paint paint = new Paint();
+        paint.setAlpha(255);
+
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(4);
+        canvas.drawRect(0, 0, getWidth(), getHeight(), paint);
+
+        this.invalidate();
+
+
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(0xFF33B5E5);
         paint.setStrokeWidth(4);
 
         int barHeight = (int)(selection * getHeight());
-        canvas.drawRect(0, barHeight, getWidth(), getHeight(), paint);
+        canvas.drawRect(15, barHeight, getWidth(), getHeight(), paint);
 
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(0x000);
-        canvas.drawLine(0, 0, getWidth(), getHeight(), paint);
         this.invalidate();
     }
 
