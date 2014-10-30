@@ -10,7 +10,6 @@ public class TimeSlot {
     public TimeSlot() {
 
     }
-
     public LocalTime getBeginTime() {
         return mBeginTime;
     }
