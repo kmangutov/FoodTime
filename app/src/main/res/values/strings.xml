@@ -4,5 +4,7 @@
     <string name="app_name">FoodTime</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="username_input">S</string>
+    <string name="password_input">S</string>
 
 </resources>
