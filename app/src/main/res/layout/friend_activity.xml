@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:weightSum="1">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friend List"
+                android:id="@+id/textView" android:autoText="false" android:textSize="32sp"/>
+        <Space
+                android:layout_width="20px"
+                android:layout_height="20px"
+                />
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add a Friend"
+                android:id="@+id/add_button"/>
+    </LinearLayout>
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="401dp"
+            android:id="@+id/friendList" android:layout_gravity="center_horizontal" android:layout_weight="0.86"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove Selected from Friend List"
+            android:id="@+id/button" android:layout_gravity="center_horizontal|bottom"/>
+</LinearLayout>

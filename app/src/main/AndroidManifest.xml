@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SchedulingActivity" />
+        <activity android:name=".FriendActivity" />
     </application>
 
 </manifest>
