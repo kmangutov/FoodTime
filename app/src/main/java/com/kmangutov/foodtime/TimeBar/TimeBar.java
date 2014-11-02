@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class TimeBar extends View {
 
     ArrayList<TimeSlot> mTimeSlots = new ArrayList<TimeSlot>();
-    TimeSlot selected = null;
+    SlotSelection selected = null;
 
     public TimeBar(Context context) {
         super(context);
@@ -30,10 +30,31 @@ public class TimeBar extends View {
         super(context, attrs);
     }
 
-    double selection = 0.0;
-
     protected int mBarWidth = 180;
     protected int mBarLeftPadding;
+
+    // determines what fraction of TimeSlot is required to be clicked to identify top or bottom
+    protected float extremitySelectionThreshold = 0.2f;
+
+    // is none of this timeslot selected, the top, the middle, or the bottom? yFrac is absolute
+    protected SlotSelection touchYFracToSelection(TimeSlot slot, float yFrac) {
+
+        SlotSelection.Location location = SlotSelection.Location.NONE;
+
+        if(yFrac < slot.start || yFrac > slot.end)
+            return new SlotSelection(slot, location);
+
+        location = SlotSelection.Location.MIDDLE;
+        float selectionFraction = (yFrac - slot.start) / (slot.end - slot.start);
+        if(selectionFraction <= extremitySelectionThreshold)
+            location = SlotSelection.Location.TOP;
+        else if(selectionFraction >= 1 - extremitySelectionThreshold)
+            location = SlotSelection.Location.BOTTOM;
+
+        System.out.println("HANDLE: " + location.name());
+
+        return new SlotSelection(slot, location);
+    }
 
     protected LocalTime fractionToTime(float fraction) {
         int hours = (int) Math.floor(fraction * 24);
@@ -52,9 +73,6 @@ public class TimeBar extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //super.onDraw(canvas);
-
-
         drawBar(canvas);
         drawTicks(canvas);
         drawTimeSlots(canvas);
@@ -70,13 +88,49 @@ public class TimeBar extends View {
         paint.setStrokeWidth(4);
 
         for(TimeSlot slot : mTimeSlots) {
-            canvas.drawRect(
-                    getBarX(),
-                    getHeight()*slot.start,
-                    getBarX() + getBarWidth(),
-                    getHeight()*slot.end,
-                    paint);
+            drawTimeSlot(canvas, slot, paint);
         }
+    }
+
+    protected void drawTimeSlot(Canvas canvas, TimeSlot slot, Paint paint) {
+
+        if(selected != null && slot == selected.slot) {
+            paint.setColor(Color.CYAN);
+        } else {
+            paint.setColor(Color.BLUE);
+        }
+
+        float y1 = getHeight()*slot.start;
+        float y2 = getHeight()*slot.end;
+        float slotH = y2 - y1;
+
+        float x1 = getBarX();
+        float x2 = getBarX() + getBarWidth();
+
+        canvas.drawRect(
+                x1,
+                y1,
+                x2,
+                y2,
+                paint);
+
+        paint.setColor(Color.BLACK);
+
+        //draw top and bototm handle
+        canvas.drawRect(
+                x1,
+                y1,
+                x2,
+                y1 + slotH * extremitySelectionThreshold,
+                paint);
+
+        canvas.drawRect(
+                x1,
+                y2 - slotH * extremitySelectionThreshold,
+                x2,
+                y2,
+                paint);
+
     }
 
     protected void drawTicks(Canvas canvas) {
@@ -105,9 +159,15 @@ public class TimeBar extends View {
         canvas.drawRect(getBarX(), 0, getBarX() + getBarWidth(), getHeight(), paint);
     }
 
-    protected TimeSlot touchYFracToTimeSlot(float fraction) {
+    protected SlotSelection touchYFracToTimeSlot(float fraction) {
         // TODO: loop through mTimeSlots and check if we selected a timeslot and return it
         // return null if we didn't
+
+        for(TimeSlot slot : mTimeSlots) {
+            if( slot.start <= fraction &&
+                slot.end >= fraction)
+                return touchYFracToSelection(slot, fraction);
+        }
 
         return null;
     }
@@ -136,8 +196,11 @@ public class TimeBar extends View {
                 selected = touchYFracToTimeSlot(yFrac);
 
                 if(selected == null) {
-                    selected = new TimeSlot(yFrac, yFrac);
-                    mTimeSlots.add(selected);
+                    TimeSlot selectedSlot = new TimeSlot(yFrac, yFrac);
+                    mTimeSlots.add(selectedSlot);
+
+                    selected = new SlotSelection(selectedSlot,
+                            SlotSelection.Location.BOTTOM);
                 }
 
 
@@ -152,7 +215,19 @@ public class TimeBar extends View {
                 /*  either change start time (top selected), end time (end selected)
                     or both if middle is selected
                  */
-                selected.end = yFrac;
+
+                switch(selected.location)
+                {
+                    case TOP:
+                        selected.slot.start = yFrac;
+                        break;
+                    case BOTTOM:
+                        selected.slot.end = yFrac;
+                        break;
+                    case MIDDLE:
+                        System.out.println("MIDDLE SELECTED");
+                        break;
+                }
 
                 break;
 
@@ -161,5 +236,22 @@ public class TimeBar extends View {
         this.invalidate();
 
         return true;
+    }
+}
+
+class SlotSelection {
+    public TimeSlot slot;
+    public Location location;
+
+    public enum Location {
+        NONE,
+        TOP,
+        MIDDLE,
+        BOTTOM
+    };
+
+    public SlotSelection(TimeSlot slot, Location location) {
+        this.slot = slot;
+        this.location = location;
     }
 }
