@@ -34,7 +34,15 @@ public class TimeBar extends View {
     protected int mBarLeftPadding;
 
     // determines what fraction of TimeSlot is required to be clicked to identify top or bottom
-    protected float extremitySelectionThreshold = 0.2f;
+    //protected float extremitySelectionThreshold = 0.2f;
+    protected float mDesiredDragSectionHeight = 50f;
+
+    protected float getDragSectionHeight(TimeSlot slot) {
+        float slotHeight = (slot.end - slot.start) * getHeight();
+        float halfSlotHeight = slotHeight / 2;
+
+        return Math.min(halfSlotHeight, mDesiredDragSectionHeight);
+    }
 
     // is none of this timeslot selected, the top, the middle, or the bottom? yFrac is absolute
     protected SlotSelection touchYFracToSelection(TimeSlot slot, float yFrac) {
@@ -46,10 +54,22 @@ public class TimeBar extends View {
 
         location = SlotSelection.Location.MIDDLE;
         float selectionFraction = (yFrac - slot.start) / (slot.end - slot.start);
-        if(selectionFraction <= extremitySelectionThreshold)
+
+        float dragSectionHeight = getDragSectionHeight(slot);
+        float slotHeight = (slot.end - slot.start) * getHeight();
+        float selectionY = selectionFraction * slotHeight;
+
+        /*if(selectionFraction <= extremitySelectionThreshold)
             location = SlotSelection.Location.TOP;
         else if(selectionFraction >= 1 - extremitySelectionThreshold)
             location = SlotSelection.Location.BOTTOM;
+        */
+
+        if(selectionY <= dragSectionHeight)
+            location = SlotSelection.Location.TOP;
+        else if(selectionY + dragSectionHeight >=  slotHeight)
+            location = SlotSelection.Location.BOTTOM;
+
 
         System.out.println("HANDLE: " + location.name());
 
@@ -116,17 +136,20 @@ public class TimeBar extends View {
 
         paint.setColor(Color.BLACK);
 
+        float dragSectionHeight = getDragSectionHeight(slot);
+        float extremitySelectionThreshold = dragSectionHeight / slot.end - slot.start;
+
         //draw top and bototm handle
         canvas.drawRect(
                 x1,
                 y1,
                 x2,
-                y1 + slotH * extremitySelectionThreshold,
+                y1 + dragSectionHeight,
                 paint);
 
         canvas.drawRect(
                 x1,
-                y2 - slotH * extremitySelectionThreshold,
+                y2 - dragSectionHeight,
                 x2,
                 y2,
                 paint);
