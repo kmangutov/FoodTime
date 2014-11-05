@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
             if(!username_input.equals("")&&!password_input.equals(""))
             {
                 //set_user(username, password);
-                startActivity(new Intent(MainActivity.this, SchedulingActivity.class));
+                startActivity(new Intent(MainActivity.this, FriendActivity.class));
             }
             else
             {

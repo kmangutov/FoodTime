@@ -1,8 +1,15 @@
 package com.kmangutov.foodtime;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
     Friend list stuff. http://www.androidbegin.com/tutorial/android-delete-multiple-selected-items-listview-tutorial/
@@ -13,6 +20,7 @@ public class FriendActivity extends Activity {
     ListView list;
     //ListViewAdapter listviewadapter;
     //List<Users> worldpopulationlist = new ArrayList<Uers>();
+    final ArrayList<String> friendList = new ArrayList<String>();
     String[] name;
     String[] username;
     String[] location;
@@ -23,6 +31,7 @@ public class FriendActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_activity);
 
+
         // Generate sample data into string arrays
         name = new String[] { "Kirill", "Isra", "Xi" };
 
@@ -31,6 +40,18 @@ public class FriendActivity extends Activity {
         location = new String[] { "Urbana, IL", "FLORIDAAAAAAAAA", "Champaign, IL" };
 
         //picture = new int[] { R.drawable., R.drawable., R.drawable. };
+
+
+
+        ListView myListView = (ListView)findViewById(R.id.friendListView);
+        final ArrayAdapter adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, friendList);
+        myListView.setAdapter(adapter);
+
+        //What do we do when an item in list is clicked?
+        myListView.setOnItemClickListener(onListClick);
+
+        friendList.addAll(Arrays.asList(name));
 
         /*
         for (int i = 0; i < rank.length; i++) {
@@ -109,5 +130,22 @@ public class FriendActivity extends Activity {
 
     }
     */
+
+    private AdapterView.OnItemClickListener onListClick=new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            //selected_name = ((TextView)view).getText().toString();
+        }
+    };
+
+
+    public void add_button(View v){
+        startActivity(new Intent(FriendActivity.this, FriendAddActivity.class));
+    }
+
+    //TODO:
+    public void remove_button(View v){
+        //Prompt the User
+    }
 
 }
