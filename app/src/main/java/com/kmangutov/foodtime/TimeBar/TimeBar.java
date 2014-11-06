@@ -77,10 +77,19 @@ public class TimeBar extends View {
     }
 
     protected LocalTime fractionToTime(float fraction) {
-        int hours = (int) Math.floor(fraction * 24);
-        int minutes = (int) Math.floor( (fraction * 24 ) % 1 );
 
-        return new LocalTime(hours, minutes);
+        //prevents app from crashing for extreme upper and lower bounds
+        if(fraction < 0)
+            return new LocalTime(0,0);
+        else if(fraction > 1)
+        {
+            return new LocalTime(23,59);
+        }
+        else {
+            int hours = (int) Math.floor(fraction * 24);
+            int minutes = (int) (int) Math.floor(((fraction * 24) % 60 % 1) * 60);
+            return new LocalTime(hours, minutes);
+        }
     }
 
     protected int getBarWidth() {
@@ -98,6 +107,7 @@ public class TimeBar extends View {
         drawTimeSlots(canvas);
     }
 
+
     protected void drawTimeSlots(Canvas canvas) {
 
         Paint paint = new Paint();
@@ -110,6 +120,50 @@ public class TimeBar extends View {
         for(TimeSlot slot : mTimeSlots) {
             drawTimeSlot(canvas, slot, paint);
         }
+
+    }
+
+    //method to draw time in XX:YY format to left of upper and lower handles of timeslots
+    protected void drawFloatingTime(TimeSlot slot, float y1, float y2, float x1, Canvas canvas) {
+
+        Paint paint = new Paint();
+        paint.setAlpha(255);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(25);
+
+        //modify to scale!!!
+        float left_bound = x1 - 150;
+        float right_bound = x1 - 30;
+
+        LocalTime start = fractionToTime(slot.start);
+        int start_hour = start.getHourOfDay();
+        int start_minute = start.getMinuteOfHour();
+        LocalTime end = fractionToTime(slot.end);
+        int end_hour = end.getHourOfDay();
+        int end_minute = end.getMinuteOfHour();
+
+        String start_str = start_hour +":"+ start_minute;
+        String end_str = end_hour +":"+ end_minute;
+        canvas.drawText(start_str, left_bound, y1, paint);
+        canvas.drawText(end_str, left_bound, y2, paint);
+    }
+    //method to clear time in XX:YY format to left of upper and lower handles of timeslots
+    protected void clearFloatingTime(TimeSlot slot, Canvas canvas) {
+
+        Paint paint = new Paint();
+        paint.setAlpha(255);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.GREEN);
+
+        //draw rectangle over text if finger released
+        int left_bound = getBarX() - 150;
+        int right_bound = getBarX() - 30;
+        float y1 = getHeight()*slot.start;
+        float y2 = getHeight()*slot.end;
+        canvas.drawRect(left_bound, y1 - 30, right_bound, y1, paint);
+        canvas.drawRect(left_bound, y2 - 30, right_bound, y2, paint);
+        return;
     }
 
     protected void drawTimeSlot(Canvas canvas, TimeSlot slot, Paint paint) {
@@ -127,6 +181,8 @@ public class TimeBar extends View {
         float x1 = getBarX();
         float x2 = getBarX() + getBarWidth();
 
+        drawFloatingTime(slot, y1, y2, x1, canvas);
+
         canvas.drawRect(
                 x1,
                 y1,
@@ -139,7 +195,7 @@ public class TimeBar extends View {
         float dragSectionHeight = getDragSectionHeight(slot);
         float extremitySelectionThreshold = dragSectionHeight / slot.end - slot.start;
 
-        //draw top and bototm handle
+        //draw top and bottom handle
         canvas.drawRect(
                 x1,
                 y1,
@@ -154,6 +210,10 @@ public class TimeBar extends View {
                 y2,
                 paint);
 
+        if(clear_time)
+        {
+            clearFloatingTime(slot, canvas);
+        }
     }
 
     protected void drawTicks(Canvas canvas) {
@@ -188,12 +248,14 @@ public class TimeBar extends View {
 
         for(TimeSlot slot : mTimeSlots) {
             if( slot.start <= fraction &&
-                slot.end >= fraction)
+                    slot.end >= fraction)
                 return touchYFracToSelection(slot, fraction);
         }
 
         return null;
     }
+
+    boolean clear_time = false;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -226,13 +288,16 @@ public class TimeBar extends View {
                             SlotSelection.Location.BOTTOM);
                 }
 
-
+                //System.out.println("ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_UP:
 
                 selected = null;
+                //selected = touchYFracToTimeSlot(yFrac);
 
                 /*  unselect selected timeslot */
+                clear_time = true;
+                System.out.println("ACTION_UP");
                 break;
             case MotionEvent.ACTION_MOVE:
                 /*  either change start time (top selected), end time (end selected)
@@ -251,13 +316,16 @@ public class TimeBar extends View {
                         System.out.println("MIDDLE SELECTED");
                         break;
                 }
-
+                //System.out.println("ACTION_MOVE");
                 break;
 
+            case MotionEvent.ACTION_CANCEL:
+                //System.out.println("ACTION_CANCEL");
+                break;
 
         }
-        this.invalidate();
 
+        this.invalidate();
         return true;
     }
 }
