@@ -126,6 +126,9 @@ public class TimeBar extends View {
     //method to draw time in XX:YY format to left of upper and lower handles of timeslots
     protected void drawFloatingTime(TimeSlot slot, float y1, float y2, float x1, Canvas canvas) {
 
+        boolean clear_time_save = clear_time;
+        clear_time = false;
+
         Paint paint = new Paint();
         paint.setAlpha(255);
         paint.setStyle(Paint.Style.FILL);
@@ -147,6 +150,16 @@ public class TimeBar extends View {
         String end_str = end_hour +":"+ end_minute;
         canvas.drawText(start_str, left_bound, y1, paint);
         canvas.drawText(end_str, left_bound, y2, paint);
+        paint.setColor(Color.WHITE);
+
+        clear_time = clear_time_save;
+
+        if(clear_time == true)
+        {
+            canvas.drawRect(left_bound, y1 - 30, right_bound, y1, paint);
+            canvas.drawRect(left_bound, y2 - 30, right_bound, y2, paint);
+        }
+        this.invalidate();
     }
     //method to clear time in XX:YY format to left of upper and lower handles of timeslots
     protected void clearFloatingTime(TimeSlot slot, Canvas canvas) {
@@ -154,15 +167,18 @@ public class TimeBar extends View {
         Paint paint = new Paint();
         paint.setAlpha(255);
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.GREEN);
+        paint.setColor(Color.WHITE);
 
         //draw rectangle over text if finger released
         int left_bound = getBarX() - 150;
         int right_bound = getBarX() - 30;
         float y1 = getHeight()*slot.start;
         float y2 = getHeight()*slot.end;
-        canvas.drawRect(left_bound, y1 - 30, right_bound, y1, paint);
-        canvas.drawRect(left_bound, y2 - 30, right_bound, y2, paint);
+        //canvas.drawRect(left_bound, y1 - 30, right_bound, y1, paint);
+        //canvas.drawRect(left_bound, y2 - 30, right_bound, y2, paint);
+        canvas.drawRect(left_bound, 0, right_bound, getHeight(), paint);
+        clear_time = false;
+        this.invalidate();
         return;
     }
 
@@ -210,10 +226,10 @@ public class TimeBar extends View {
                 y2,
                 paint);
 
-        if(clear_time)
+       /* if(clear_time)
         {
             clearFloatingTime(slot, canvas);
-        }
+        }*/
     }
 
     protected void drawTicks(Canvas canvas) {
