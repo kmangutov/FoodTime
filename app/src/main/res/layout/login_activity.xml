@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background = "@drawable/burgermask"
+
             android:orientation="vertical"
             android:layout_weight="4">
 
@@ -78,17 +78,25 @@
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Submit"
+                    android:text="Log In"
                     android:fontFamily="sans-serif-light"
                     android:id="@+id/buttonSubmit"
-                    android:layout_below="@+id/textPassword"
-                    android:layout_alignLeft="@id/password_input"
-                    android:layout_marginTop="28dp"
-                    android:layout_alignRight="@+id/button"
                     android:textSize="18dp"
                     android:onClick="login_button"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:layout_below="@id/password_input"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="26dp"/>
 
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Not Registered Yet?"
+                        android:id="@+id/registerText"
+                        android:layout_marginBottom="50dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignBottom="@+id/button"
+                        />
                 <Button
                     android:id="@+id/button"
                     android:layout_width="wrap_content"
@@ -99,8 +107,8 @@
                     android:clickable="true"
                     android:layout_centerHorizontal="true"
                     android:onClick="new_user_button"
-                    android:layout_marginTop="20dp"
-                    android:layout_below="@id/buttonSubmit"/>
+                    android:layout_marginBottom="32dp"
+                    android:layout_alignParentBottom="true"/>
             </RelativeLayout>
             </LinearLayout>
 
