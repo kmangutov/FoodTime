@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /*
     Friend list stuff. http://www.androidbegin.com/tutorial/android-delete-multiple-selected-items-listview-tutorial/
@@ -18,134 +18,92 @@ import java.util.Arrays;
 public class FriendActivity extends Activity {
     // Declare Variables
     ListView list;
-    //ListViewAdapter listviewadapter;
-    //List<Users> worldpopulationlist = new ArrayList<Uers>();
-    final ArrayList<String> friendList = new ArrayList<String>();
-    String[] name;
-    String[] username;
-    String[] location;
-    int[] picture;
+    FriendListAdapter adapter = null;
+    ArrayList<User> friendList = new ArrayList<User>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_activity);
 
+        //pregenerated
+        friendList.add(new User("smthn","Kirill", "Urbana, IL"));
+        friendList.add(new User("smthn2","Isra", "FLORIDAAAAAA"));
+        friendList.add(new User("smthn3","Xi", "Champaign, IL"));
 
-        // Generate sample data into string arrays
-        name = new String[] { "Kirill", "Isra", "Xi" };
-
-        username = new String[] { "smthn", "smthn2","smthn3" };
-
-        location = new String[] { "Urbana, IL", "FLORIDAAAAAAAAA", "Champaign, IL" };
-
-        //picture = new int[] { R.drawable., R.drawable., R.drawable. };
-
-
-
-        ListView myListView = (ListView)findViewById(R.id.friendListView);
-        final ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, friendList);
-        myListView.setAdapter(adapter);
-
-        //What do we do when an item in list is clicked?
-        myListView.setOnItemClickListener(onListClick);
-
-        friendList.addAll(Arrays.asList(name));
-
+        showListView();
+        removeButton();
         /*
         for (int i = 0; i < rank.length; i++) {
             WorldPopulation worldpopulation = new WorldPopulation(flag[i],
                     rank[i], country[i], population[i]);
             worldpopulationlist.add(worldpopulation);*/
-        }
-
-        /*
-        // Locate the ListView in listview_main.xml
-        list = (ListView) findViewById(R.id.listview);
-
-        // Pass results to ListViewAdapter Class
-        listviewadapter = new ListViewAdapter(this, R.layout.listview_item,
-                worldpopulationlist);
-
-        // Binds the Adapter to the ListView
-        list.setAdapter(listviewadapter);
-        list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        // Capture ListView item click
-        list.setMultiChoiceModeListener(new MultiChoiceModeListener() {
-
-            @Override
-            public void onItemCheckedStateChanged(ActionMode mode,
-                                                  int position, long id, boolean checked) {
-                // Capture total checked items
-                final int checkedCount = list.getCheckedItemCount();
-                // Set the CAB title according to total checked items
-                mode.setTitle(checkedCount + " Selected");
-                // Calls toggleSelection method from ListViewAdapter Class
-                listviewadapter.toggleSelection(position);
-            }
-
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.delete:
-                        // Calls getSelectedIds method from ListViewAdapter Class
-                        SparseBooleanArray selected = listviewadapter
-                                .getSelectedIds();
-                        // Captures all selected ids with a loop
-                        for (int i = (selected.size() - 1); i >= 0; i--) {
-                            if (selected.valueAt(i)) {
-                                WorldPopulation selecteditem = listviewadapter
-                                        .getItem(selected.keyAt(i));
-                                // Remove selected items following the ids
-                                listviewadapter.remove(selecteditem);
-                            }
-                        }
-                        // Close CAB
-                        mode.finish();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                mode.getMenuInflater().inflate(R.menu.activity_main, menu);
-                return true;
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-                // TODO Auto-generated method stub
-                listviewadapter.removeSelection();
-            }
-
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                // TODO Auto-generated method stub
-                return false;
-            }
-        });
 
     }
-    */
 
-    private AdapterView.OnItemClickListener onListClick=new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    private void showListView() {
 
-            //selected_name = ((TextView)view).getText().toString();
-        }
-    };
+        //ArrayAdapter for friendList array
+        ListView myListView = (ListView) findViewById(R.id.friendListView);
+        adapter = new FriendListAdapter(this,
+                R.layout.friend_checkbox_layout, friendList);
+        ListView listView = (ListView) findViewById(R.id.friendListView);
 
+        listView.setAdapter(adapter);
 
+        //What do we do when an item in list is clicked?
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Open the User's info page
+                //selected_name = ((TextView)view).getText().toString();
+                //Unimplemented
+            }
+        });
+    }
+
+    /*
+    Go to the friend-search&adding page
+     */
     public void add_button(View v){
         startActivity(new Intent(FriendActivity.this, FriendAddActivity.class));
     }
 
-    //TODO:
-    public void remove_button(View v){
-        //Prompt the User
+
+    private void removeButton() {
+
+        //TODO: Prompt the User
+
+
+        Button myButton = (Button) findViewById(R.id.but_delFriendList);
+
+        myButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                StringBuffer responseText = new StringBuffer();
+                responseText.append("De-friending the following:\n");
+
+                ArrayList<User> friendList = adapter.friendList;
+
+                for(int i=0;i<friendList.size();i++){
+                    User user = friendList.get(i);
+                    if(user.isSelected()){
+                        responseText.append("\n" + user.getName());
+                        friendList.remove(user);
+                        i--;
+                    }
+                }
+
+                Toast.makeText(getApplicationContext(),
+                        responseText, Toast.LENGTH_LONG).show();
+
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+
     }
 
 }
