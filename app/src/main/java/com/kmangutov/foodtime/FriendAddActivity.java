@@ -19,16 +19,21 @@ public class FriendAddActivity extends Activity {
 
     FriendListAdapter adapter = null;
     ArrayList<User> recList = new ArrayList<User>();
+    ArrayList<User> friendList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_add_activity);
 
-        //pregenerated
-        recList.add(new User("smthn4","Jon", "Urbana, IL"));
-        recList.add(new User("smthn5","Borg", "Urbana, IL"));
-        recList.add(new User("smthn6","Harrison", "Champaign, IL"));
+        GlobalClass vars = (GlobalClass) getApplicationContext();
+        ArrayList<User> userList = vars.getUserList();
+        friendList = vars.getFriendList();
+        for(int i=0; i<userList.size(); ++i) {
+            if (!friendList.contains(userList.get(i))) {
+                recList.add(userList.get(i));
+            }
+        }
 
         showListView();
         addButton();
@@ -88,17 +93,18 @@ public class FriendAddActivity extends Activity {
                 StringBuffer responseText = new StringBuffer();
                 responseText.append("Added the following:\n");
 
-                ArrayList<User> friendList = adapter.friendList;
+                GlobalClass vars = (GlobalClass) getApplicationContext();
+                ArrayList<User> recList = adapter.userList;
 
-                for(int i=0;i<friendList.size();i++){
-                    User user = friendList.get(i);
+                for(int i=0;i<recList.size();i++){
+                    User user = recList.get(i);
                     if(user.isSelected()){
                         responseText.append("\n" + user.getName());
-                        //TODO: instead, add to global list of friends
-                        friendList.remove(user);
-                        i--;
+                        vars.getFriendList().add(user);
                     }
                 }
+
+                ((GlobalClass)getApplicationContext()).unsetAll();
 
                 Toast.makeText(getApplicationContext(),
                         responseText, Toast.LENGTH_LONG).show();

@@ -19,17 +19,12 @@ public class FriendActivity extends Activity {
     // Declare Variables
     ListView list;
     FriendListAdapter adapter = null;
-    ArrayList<User> friendList = new ArrayList<User>();
+    //ArrayList<User> friendList = new ArrayList<User>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_activity);
-
-        //pregenerated
-        friendList.add(new User("smthn","Kirill", "Urbana, IL"));
-        friendList.add(new User("smthn2","Isra", "FLORIDAAAAAA"));
-        friendList.add(new User("smthn3","Xi", "Champaign, IL"));
 
         showListView();
         removeButton();
@@ -41,12 +36,22 @@ public class FriendActivity extends Activity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //GlobalClass vars = (GlobalClass) getApplicationContext();
+        //adapter.userList = vars.getFriendList();
+        adapter.notifyDataSetChanged();
+    }
+
     private void showListView() {
+
+        GlobalClass vars = (GlobalClass) getApplicationContext();
 
         //ArrayAdapter for friendList array
         ListView myListView = (ListView) findViewById(R.id.friendListView);
         adapter = new FriendListAdapter(this,
-                R.layout.friend_checkbox_layout, friendList);
+                R.layout.friend_checkbox_layout, vars.getFriendList());
         ListView listView = (ListView) findViewById(R.id.friendListView);
 
         listView.setAdapter(adapter);
@@ -74,7 +79,6 @@ public class FriendActivity extends Activity {
 
         //TODO: Prompt the User
 
-
         Button myButton = (Button) findViewById(R.id.but_delFriendList);
 
         myButton.setOnClickListener(new View.OnClickListener() {
@@ -85,16 +89,20 @@ public class FriendActivity extends Activity {
                 StringBuffer responseText = new StringBuffer();
                 responseText.append("De-friending the following:\n");
 
-                ArrayList<User> friendList = adapter.friendList;
+                //GlobalClass vars = (GlobalClass) getApplicationContext();
+                ArrayList<User> friendList = adapter.userList;
 
                 for(int i=0;i<friendList.size();i++){
                     User user = friendList.get(i);
                     if(user.isSelected()){
                         responseText.append("\n" + user.getName());
                         friendList.remove(user);
+                        //vars.getFriendList().remove(user);
                         i--;
                     }
                 }
+
+                ((GlobalClass)getApplicationContext()).unsetAll();
 
                 Toast.makeText(getApplicationContext(),
                         responseText, Toast.LENGTH_LONG).show();

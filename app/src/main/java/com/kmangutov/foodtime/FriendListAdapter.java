@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,13 +17,13 @@ import java.util.ArrayList;
 
 public class FriendListAdapter extends ArrayAdapter<User> {
 
-    public ArrayList<User> friendList;
+    public ArrayList<User> userList;
 
     public FriendListAdapter(Context context, int textViewResourceId,
-                               ArrayList<User> friendList) {
-        super(context, textViewResourceId, friendList);
-        this.friendList = new ArrayList<User>();
-        this.friendList.addAll(friendList);
+                               ArrayList<User> userList) {
+        super(context, textViewResourceId, userList);
+        this.userList = userList; /*new ArrayList<User>();
+        this.userList.addAll(userList);*/
     }
 
     private class ViewHolder {
@@ -34,7 +33,7 @@ public class FriendListAdapter extends ArrayAdapter<User> {
 
     @Override
     public int getCount() {
-        return friendList.size();
+        return userList.size();
     }
 
     @Override
@@ -57,11 +56,11 @@ public class FriendListAdapter extends ArrayAdapter<User> {
                 public void onClick(View v) {
                     CheckBox cb = (CheckBox) v;
                     User user = (User) cb.getTag();
-                    Toast.makeText(getContext().getApplicationContext(),
+                    /*Toast.makeText(getContext().getApplicationContext(),
                             "Clicked on Checkbox: " + cb.getText() +
                                     " is " + cb.isChecked(),
                             Toast.LENGTH_LONG
-                    ).show();
+                    ).show();*/
                     user.setSelected(cb.isChecked());
                 }
             });
@@ -69,7 +68,7 @@ public class FriendListAdapter extends ArrayAdapter<User> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        User user = friendList.get(position);
+        User user = userList.get(position);
         holder.location.setText(" (" + user.getLocation() + ")");
         holder.name.setText(user.getName());
         holder.name.setChecked(user.isSelected());

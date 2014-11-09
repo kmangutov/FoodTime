@@ -30,6 +30,8 @@ public class HomeActivity extends Activity {
         acceptedList = (ListView) findViewById(R.id.accepted_list);
         acceptedArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, acceptedArray);
         acceptedList.setAdapter(acceptedArrayAdapter);
+
+
     }
 
     @Override
@@ -55,4 +57,5 @@ public class HomeActivity extends Activity {
     public void scheduleMeeting(View v){
         startActivity(new Intent(HomeActivity.this, SchedulingActivity.class));
     }
+
 }
