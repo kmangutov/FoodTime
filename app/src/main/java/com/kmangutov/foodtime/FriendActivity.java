@@ -1,14 +1,13 @@
 package com.kmangutov.foodtime;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 public class FriendActivity extends Activity {
     // Declare Variables
     ListView list;
-    MyCustomAdapter adapter = null;
+    FriendListAdapter adapter = null;
     ArrayList<User> friendList = new ArrayList<User>();
 
     @Override
@@ -46,7 +45,7 @@ public class FriendActivity extends Activity {
 
         //ArrayAdapter for friendList array
         ListView myListView = (ListView) findViewById(R.id.friendListView);
-        adapter = new MyCustomAdapter(this,
+        adapter = new FriendListAdapter(this,
                 R.layout.friend_checkbox_layout, friendList);
         ListView listView = (ListView) findViewById(R.id.friendListView);
 
@@ -70,65 +69,6 @@ public class FriendActivity extends Activity {
         startActivity(new Intent(FriendActivity.this, FriendAddActivity.class));
     }
 
-    private class MyCustomAdapter extends ArrayAdapter<User> {
-
-        public ArrayList<User> friendList;
-
-        public MyCustomAdapter(Context context, int textViewResourceId,
-                               ArrayList<User> friendList) {
-            super(context, textViewResourceId, friendList);
-            this.friendList = new ArrayList<User>();
-            this.friendList.addAll(friendList);
-        }
-
-        private class ViewHolder {
-            TextView location;
-            CheckBox name;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            ViewHolder holder = null;
-            Log.v("ConvertView", String.valueOf(position));
-
-            if (convertView == null) {
-                LayoutInflater vi = (LayoutInflater)getSystemService(
-                        Context.LAYOUT_INFLATER_SERVICE);
-                convertView = vi.inflate(R.layout.friend_checkbox_layout, null);
-
-                holder = new ViewHolder();
-                holder.location = (TextView) convertView.findViewById(R.id.loc);
-                holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
-                convertView.setTag(holder);
-
-                holder.name.setOnClickListener( new View.OnClickListener() {
-                    public void onClick(View v) {
-                        CheckBox cb = (CheckBox) v ;
-                        User user = (User) cb.getTag();
-                        Toast.makeText(getApplicationContext(),
-                                "Clicked on Checkbox: " + cb.getText() +
-                                        " is " + cb.isChecked(),
-                                Toast.LENGTH_LONG).show();
-                        user.setSelected(cb.isChecked());
-                    }
-                });
-            }
-            else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
-            User user = friendList.get(position);
-            holder.location.setText(" (" +  user.getLocation() + ")");
-            holder.name.setText(user.getName());
-            holder.name.setChecked(user.isSelected());
-            holder.name.setTag(user);
-
-            return convertView;
-
-        }
-
-    }
 
     private void removeButton() {
 
