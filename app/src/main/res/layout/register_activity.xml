@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username ID:"
+                android:id="@+id/reg_tusername" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+                android:textSize="@dimen/header_text_size"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID Password:"
+                android:id="@+id/reg_tpassword" android:layout_below="@+id/reg_tusername" android:layout_alignParentLeft="true"
+                android:textSize="@dimen/header_text_size"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First Name:"
+                android:id="@+id/reg_tname1" android:layout_below="@+id/reg_tpassword"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/header_text_size"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Middle Name:"
+                android:id="@+id/reg_tname2" android:layout_below="@+id/reg_tname1"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/header_text_size"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Name:"
+                android:id="@+id/reg_tname3" android:layout_below="@+id/reg_tname2"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/header_text_size"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location:"
+                android:id="@+id/reg_tlocation" android:layout_below="@+id/reg_tname3"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/header_text_size"/>
+        <EditText
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/reg_username"
+                android:layout_alignBottom="@+id/reg_tusername"
+                android:layout_toRightOf="@+id/reg_tusername"/>
+        <EditText
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/reg_password"
+                android:layout_alignBottom="@+id/reg_tpassword"
+                android:layout_toRightOf="@+id/reg_tpassword"/>
+        <EditText
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:id="@+id/reg_name1"
+                android:layout_alignBottom="@+id/reg_tname1"
+                android:layout_toRightOf="@+id/reg_tname1"/>
+        <EditText
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:id="@+id/reg_name2"
+                android:layout_alignBottom="@+id/reg_tname2"
+                android:layout_toRightOf="@+id/reg_tname2"/>
+        <EditText
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:id="@+id/reg_name3"
+                android:layout_alignBottom="@+id/reg_tname3"
+                android:layout_toRightOf="@+id/reg_tname3"/>
+        <EditText
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:id="@+id/reg_location"
+                android:layout_alignBottom="@+id/reg_tlocation"
+                android:layout_toRightOf="@+id/reg_tlocation"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:id="@+id/reg_button" android:layout_below="@+id/reg_tlocation"
+                android:layout_toLeftOf="@+id/reg_location" android:layout_marginTop="130dp"
+                android:onClick="register_submit_button"/>
+    </RelativeLayout>
+</LinearLayout>

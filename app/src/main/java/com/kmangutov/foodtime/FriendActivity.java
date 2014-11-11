@@ -55,6 +55,8 @@ public class FriendActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.friendListView);
 
         listView.setAdapter(adapter);
+        listView.smoothScrollToPosition(0);
+        adapter.notifyDataSetChanged();
 
         //What do we do when an item in list is clicked?
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

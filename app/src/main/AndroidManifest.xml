@@ -17,6 +17,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".RegisterActivity"
+                  android:parentActivityName="com.kmangutov.foodtime.MainActivity"
+                />
+
         <activity android:name=".SchedulingActivity"
             android:parentActivityName="com.kmangutov.foodtime.HomeActivity"
         />

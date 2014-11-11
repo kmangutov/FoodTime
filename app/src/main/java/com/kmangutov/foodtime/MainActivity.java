@@ -96,4 +96,8 @@ public class MainActivity extends Activity {
         else
             Toast.makeText(this, "Error logging in", Toast.LENGTH_SHORT).show();
     }
+
+    public void new_user_button(View v) {
+        startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+    }
 }
