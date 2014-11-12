@@ -29,7 +29,7 @@ public class TimeBar extends View {
     public TimeBar(Context context, AttributeSet attrs) {
 
         super(context, attrs);
-        addDummyTime(3, 15);
+        //addDummyTime(3, 15);
     }
 
     protected int mBarWidth = 180;
