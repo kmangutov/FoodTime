@@ -11,7 +11,11 @@ public class User {
     //Used for checkbox lists?
     Boolean selected= false;
 
-
+    public User(String name)
+    {
+        this.name = name;
+        this.username = name;
+    }
     public User(String username, String name, String location) {
         super();
         this.username = username;
