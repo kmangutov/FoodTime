@@ -1,7 +1,8 @@
 package com.kmangutov.foodtime;
 
+import java.lang.reflect.Array;
 import java.util.Calendar;
-import java.util.List;
+import java.util.ArrayList;
 /**
  * Created by Chihiro on 11/12/2014.
  */
@@ -10,9 +11,29 @@ public class Event {
     private String location;
     private Calendar startTime;
     private Calendar endTime;
-    private List<User> waitingFriends;
-    private List<User> acceptedFriends;
+    private ArrayList<User> waitingFriends;
+    private ArrayList<User> acceptedFriends;
 
+    public Event(String title, String location){
+        this.title = title;
+        this.location = location;
+    }
+
+    public Event(String title, String location, Calendar startTime, Calendar endTime ){
+        this.title = title;
+        this.location = location;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public Event(String title, String location, Calendar startTime, Calendar endTime, ArrayList<User> waitingFriends, ArrayList<User> acceptedFriends){
+        this.title = title;
+        this.location = location;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.waitingFriends = waitingFriends;
+        this.acceptedFriends = acceptedFriends;
+    }
     public void setTitle(String title){
        this. title = title;
     }
@@ -45,19 +66,19 @@ public class Event {
         return  this.endTime;
     }
 
-    public void  setWaitingFriends(List<User> waitingFriends){
+    public void  setWaitingFriends(ArrayList<User> waitingFriends){
         this.waitingFriends = waitingFriends;
     }
 
-    public List<User> getWaitingFriends(){
+    public ArrayList<User> getWaitingFriends(){
         return this. waitingFriends;
     }
 
-    public void setAcceptedFriends(List<User> acceptedFriends){
+    public void setAcceptedFriends(ArrayList<User> acceptedFriends){
         this.acceptedFriends = acceptedFriends;
     }
 
-    public List<User> getAcceptedFriends(){
+    public ArrayList<User> getAcceptedFriends(){
         return  this.acceptedFriends;
     }
 
