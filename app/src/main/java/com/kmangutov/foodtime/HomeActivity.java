@@ -55,7 +55,7 @@ public class HomeActivity extends Activity {
     }
 
     public void scheduleMeeting(View v){
-        startActivity(new Intent(HomeActivity.this, SchedulingActivity.class));
+        startActivity(new Intent(HomeActivity.this, ScheduleEventActivity.class));
     }
 
 }

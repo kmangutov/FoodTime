@@ -3,7 +3,7 @@
     package="com.kmangutov.foodtime" >
 
     <application
-        android:name="com.kmangutov.foodtime.GlobalClass"
+        android:name=".GlobalClass"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -16,22 +16,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".RegisterActivity"
-                  android:parentActivityName="com.kmangutov.foodtime.MainActivity"
-                />
-
-        <activity android:name=".SchedulingActivity"
-            android:parentActivityName="com.kmangutov.foodtime.HomeActivity"
-        />
-
-        <activity android:name=".FriendActivity"
-            android:parentActivityName="com.kmangutov.foodtime.HomeActivity"
-        />
-
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SchedulingActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".FriendActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".FriendAddActivity" />
-
         <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".ScheduleEventActivity"
+            android:label="FoodTime:Schedule Meetup"
+            android:parentActivityName=".HomeActivity" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kmangutov.foodtime.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

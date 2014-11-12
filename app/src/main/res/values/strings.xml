@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">FoodTime</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -10,4 +11,10 @@
     <string name="acceptedSection">Accepted Events</string>
     <string name="invitedSection">Pending Invites</string>
     <string name="action_person">Friends</string>
+    <string name="action_addFriend">Add Friends</string>
+    <string name="title_activity_schedule_invite_friend">ScheduleInviteFriend</string>
+    <string name="meeting_title">Meeting Title</string>
+    <string name="meeting_location">Location</string>
+    <string name="done">Done</string>
+
 </resources>
