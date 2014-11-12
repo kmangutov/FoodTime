@@ -40,6 +40,10 @@
             android:name="com.kmangutov.foodtime.AcceptedEventViewActivity"
             android:label="@string/title_activity_accepted_event_view" >
         </activity>
+        <activity
+            android:name="com.kmangutov.foodtime.DummyEventActivity"
+            android:label="@string/title_activity_dummy_event" >
+        </activity>
     </application>
 
 </manifest>
