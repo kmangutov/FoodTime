@@ -27,7 +27,9 @@ public class TimeBar extends View {
     }
 
     public TimeBar(Context context, AttributeSet attrs) {
+
         super(context, attrs);
+        addDummyTime(3, 15);
     }
 
     protected int mBarWidth = 180;
@@ -76,6 +78,11 @@ public class TimeBar extends View {
         return new SlotSelection(slot, location);
     }
 
+    protected float timeToFraction(LocalTime time) {
+
+        return time.getHourOfDay()/24.0f + time.getMinuteOfHour()/60.0f/24.0f;
+    }
+
     protected LocalTime fractionToTime(float fraction) {
 
         //prevents app from crashing for extreme upper and lower bounds
@@ -90,6 +97,20 @@ public class TimeBar extends View {
             int minutes = (int) (int) Math.floor(((fraction * 24) % 60 % 1) * 60);
             return new LocalTime(hours, minutes);
         }
+    }
+
+    public void addTimeSlot(TimeSlot slot) {
+
+        mTimeSlots.add(slot);
+    }
+
+    public void addDummyTime(int hour, int minute) {
+
+        LocalTime start = new LocalTime(hour, minute);
+        LocalTime end = new LocalTime(hour + 1, minute + 30);
+        TimeSlot slot = new TimeSlot(timeToFraction(start), timeToFraction(end));
+
+        addTimeSlot(slot);
     }
 
     protected int getBarWidth() {
