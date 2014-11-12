@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Created by PaulChihiro on 11/4/2014.
+ * Created by Chihiro on 11/4/2014.
  */
 
 public class AcceptedEventViewActivity extends Activity {
