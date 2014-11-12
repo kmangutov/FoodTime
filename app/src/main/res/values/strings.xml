@@ -16,5 +16,6 @@
     <string name="meeting_title">Meeting Title</string>
     <string name="meeting_location">Location</string>
     <string name="done">Done</string>
+    <string name="title_activity_accepted_event_view">AcceptedEventViewActivity</string>
 
 </resources>

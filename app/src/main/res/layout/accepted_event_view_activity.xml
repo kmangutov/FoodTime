@@ -1,0 +1,129 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kmangutov.foodtime.AcceptedEventViewActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" EventName"
+        android:textSize="22dp"
+        android:fontFamily="sans-serif"
+        android:id="@+id/textEventName"
+        android:background="#0F4DA8"
+        android:textColor="#ffffff"
+        android:editable="false"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/textEventName">
+
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/imageCalendar"
+            android:src="@drawable/calendar_icon"
+            android:layout_marginTop="2dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wed, Nov, 12:00 p.m. - 1:00 p.m."
+            android:textSize="18dp"
+            android:layout_toRightOf="@id/imageCalendar"
+            android:id="@+id/textTime"
+            android:ems="14"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="2dp"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignLeft="@id/imageCalendar"
+            android:id="@+id/imageLocation"
+            android:src="@drawable/location_icon"
+            android:layout_below="@id/imageCalendar"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:ems="14"
+            android:textSize="18dp"
+            android:layout_toRightOf="@id/imageLocation"
+            android:id="@+id/textLocation"
+            android:layout_below="@id/textTime"
+            android:layout_alignLeft="@id/textTime"/>
+
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_launcher"
+            android:layout_below="@id/imageLocation"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/imageYes" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_toRightOf="@id/imageYes"
+            android:layout_alignTop="@id/imageYes"
+            android:id="@+id/listViewYes"
+            android:drawSelectorOnTop="false" />
+
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_launcher"
+            android:layout_below="@id/listViewYes"
+            android:id="@+id/imageNo" />
+
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_below="@id/listViewYes"
+            android:layout_toRightOf="@id/imageNo"
+            android:layout_alignTop="@id/imageNo"
+            android:id="@+id/listViewNo"
+            android:layout_weight="0.02" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/listViewNo">
+
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="Leave"
+                android:onClick="leave_button"
+                android:id="@+id/buttonLeave"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/buttonLeave"
+                android:onClick="edit_button"
+                android:text="Edit"
+                android:id="@+id/buttonEdit" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
