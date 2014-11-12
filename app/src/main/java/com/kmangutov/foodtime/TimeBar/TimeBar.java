@@ -31,7 +31,7 @@ public class TimeBar extends View {
     }
 
     protected int mBarWidth = 180;
-    protected int mBarLeftPadding;
+    protected int mBarRightPadding = 60;
 
     // determines what fraction of TimeSlot is required to be clicked to identify top or bottom
     //protected float extremitySelectionThreshold = 0.2f;
@@ -97,7 +97,7 @@ public class TimeBar extends View {
     }
 
     protected int getBarX() {
-        return getWidth() - getBarWidth();
+        return getWidth() - getBarWidth() - mBarRightPadding;
     }
 
     @Override
@@ -123,72 +123,48 @@ public class TimeBar extends View {
 
     }
 
-    //method to draw time in XX:YY format to left of upper and lower handles of timeslots
-    protected void drawFloatingTime(TimeSlot slot, float y1, float y2, float x1, Canvas canvas) {
+    protected void drawPreciseTime(Canvas canvas,
+                                   TimeSlot slot,
+                                   Paint paint,
+                                   float x,
+                                   float y1,
+                                   float y2) {
 
-        boolean clear_time_save = clear_time;
-        clear_time = false;
 
-        Paint paint = new Paint();
-        paint.setAlpha(255);
-        paint.setStyle(Paint.Style.FILL);
+
+
+        paint.setTextSize(36);
+        Paint.FontMetrics metrics = paint.getFontMetrics();
+        float yOffset = metrics.ascent + metrics.descent;
+
+        float myX = x - 100;
+        float myWidth = 95;
+        float yPadding = 5;
+
+        String startStr = fracToString(slot.start);
+        String endStr = fracToString(slot.end);
+
+
+        paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.BLACK);
-        paint.setTextSize(25);
-
-        //modify to scale!!!
-        float left_bound = x1 - 150;
-        float right_bound = x1 - 30;
-
-        LocalTime start = fractionToTime(slot.start);
-        int start_hour = start.getHourOfDay();
-        int start_minute = start.getMinuteOfHour();
-        LocalTime end = fractionToTime(slot.end);
-        int end_hour = end.getHourOfDay();
-        int end_minute = end.getMinuteOfHour();
-
-        String start_str = start_hour +":"+ start_minute;
-        String end_str = end_hour +":"+ end_minute;
-        canvas.drawText(start_str, left_bound, y1, paint);
-        canvas.drawText(end_str, left_bound, y2, paint);
-        paint.setColor(Color.WHITE);
-
-        clear_time = clear_time_save;
-
-        if(clear_time == true)
-        {
-            canvas.drawRect(left_bound, y1 - 30, right_bound, y1, paint);
-            canvas.drawRect(left_bound, y2 - 30, right_bound, y2, paint);
-        }
-        this.invalidate();
-    }
-    //method to clear time in XX:YY format to left of upper and lower handles of timeslots
-    protected void clearFloatingTime(TimeSlot slot, Canvas canvas) {
-
-        Paint paint = new Paint();
         paint.setAlpha(255);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.WHITE);
+        paint.setStrokeWidth(4);
 
-        //draw rectangle over text if finger released
-        int left_bound = getBarX() - 150;
-        int right_bound = getBarX() - 30;
-        float y1 = getHeight()*slot.start;
-        float y2 = getHeight()*slot.end;
-        //canvas.drawRect(left_bound, y1 - 30, right_bound, y1, paint);
-        //canvas.drawRect(left_bound, y2 - 30, right_bound, y2, paint);
-        canvas.drawRect(left_bound, 0, right_bound, getHeight(), paint);
-        clear_time = false;
-        this.invalidate();
-        return;
+        System.out.println("yOffset: " + yOffset);
+
+
+        canvas.drawRect(myX - yPadding, y1 - yPadding, myX + myWidth, y1 - yOffset + yPadding, paint);
+        canvas.drawRect(myX - yPadding, y2 - yPadding, myX + myWidth, y2 - yOffset + yPadding, paint);
+
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(1);
+        paint.setColor(Color.BLACK);
+
+        canvas.drawText(startStr, myX, y1 - yOffset, paint);
+        canvas.drawText(endStr, myX, y2 - yOffset, paint);
     }
 
     protected void drawTimeSlot(Canvas canvas, TimeSlot slot, Paint paint) {
-
-        if(selected != null && slot == selected.slot) {
-            paint.setColor(Color.CYAN);
-        } else {
-            paint.setColor(Color.BLUE);
-        }
 
         float y1 = getHeight()*slot.start;
         float y2 = getHeight()*slot.end;
@@ -197,7 +173,16 @@ public class TimeBar extends View {
         float x1 = getBarX();
         float x2 = getBarX() + getBarWidth();
 
-        drawFloatingTime(slot, y1, y2, x1, canvas);
+
+        if(selected != null && slot == selected.slot) {
+            drawPreciseTime(canvas, slot, paint, x1, y1, y2);
+            paint.setColor(Color.CYAN);
+        } else {
+            paint.setColor(Color.BLUE);
+        }
+
+
+        //drawFloatingTime(slot, y1, y2, x1, canvas);
 
         canvas.drawRect(
                 x1,
@@ -210,6 +195,7 @@ public class TimeBar extends View {
 
         float dragSectionHeight = getDragSectionHeight(slot);
         float extremitySelectionThreshold = dragSectionHeight / slot.end - slot.start;
+
 
         //draw top and bottom handle
         canvas.drawRect(
@@ -232,19 +218,42 @@ public class TimeBar extends View {
         }*/
     }
 
+    // convert fraction of timebar to hour:minute
+    protected String fracToString(float frac) {
+
+        int startHour = fractionToTime(frac).getHourOfDay();
+        int startMinute = fractionToTime(frac).getMinuteOfHour();
+        startHour = (startHour == 12)?12:(startHour % 12);
+
+        return startHour + ":" + String.format("%02d", startMinute);
+    }
+
     protected void drawTicks(Canvas canvas) {
         Paint paint = new Paint();
         paint.setAlpha(255);
 
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.BLACK);
-        paint.setTextSize(20);
+        float x = getBarX() + getBarWidth() + 10;
 
         for(int i = 0; i < 24; i++) {
 
-            String str = String.format("%02d", i);
+            float y = i*getHeight()/24;
 
-            canvas.drawText(str, getBarX() - 30, 20 + i*getHeight()/24, paint);
+            int timeVal = (i == 12)?12:(i % 12);
+
+            if(i % 3 == 0) {
+                paint.setTextSize(32);
+                paint.setColor(Color.BLACK);
+                canvas.drawLine(getBarX(), y, getBarX() + getBarWidth(), y, paint);
+            }
+            else
+                paint.setTextSize(20);
+
+            String str = String.format("%02d", timeVal);
+
+            //canvas.drawText(str, getBarX() - 40, i*getHeight()/24, paint);
+            canvas.drawText(str, x, y, paint);
         }
     }
 
