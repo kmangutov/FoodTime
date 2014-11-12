@@ -1,5 +1,7 @@
 package com.kmangutov.foodtime.TimeBar;
 
+import android.graphics.Color;
+
 import org.joda.time.LocalTime;
 
 public class TimeSlot {
@@ -11,6 +13,7 @@ public class TimeSlot {
     public float start;
     public float end;
 
+    public int color = Color.BLUE;
 
     public TimeSlot() {
 
@@ -20,6 +23,8 @@ public class TimeSlot {
         this.start = start;
         this.end = end;
     }
+
+    public void setColor(int color) { this.color = color; }
 
     public LocalTime getBeginTime() {
         return mBeginTime;

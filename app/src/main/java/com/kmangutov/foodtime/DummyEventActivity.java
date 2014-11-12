@@ -2,6 +2,7 @@ package com.kmangutov.foodtime;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +30,7 @@ public class DummyEventActivity extends Activity {
         friendArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, friends);
         friendsList.setAdapter(friendArrayAdapter);
         TimeBar tb = (TimeBar) findViewById(R.id.eventTimeBar);
-        tb.addDummyTime(12, 15);
+        tb.addDummyTime(12, 15, Color.GREEN);
     }
 
 

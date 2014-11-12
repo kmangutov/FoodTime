@@ -104,11 +104,12 @@ public class TimeBar extends View {
         mTimeSlots.add(slot);
     }
 
-    public void addDummyTime(int hour, int minute) {
+    public void addDummyTime(int hour, int minute, int color) {
 
         LocalTime start = new LocalTime(hour, minute);
-        LocalTime end = new LocalTime(hour + 1, minute + 30);
+        LocalTime end = new LocalTime(hour + 2, minute + 30);
         TimeSlot slot = new TimeSlot(timeToFraction(start), timeToFraction(end));
+        slot.setColor(color);
 
         addTimeSlot(slot);
     }
@@ -199,7 +200,7 @@ public class TimeBar extends View {
             drawPreciseTime(canvas, slot, paint, x1, y1, y2);
             paint.setColor(Color.CYAN);
         } else {
-            paint.setColor(Color.BLUE);
+            paint.setColor(slot.color);//Color.BLUE);
         }
 
 
