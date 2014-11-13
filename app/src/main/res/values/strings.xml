@@ -15,6 +15,8 @@
     <string name="title_activity_schedule_invite_friend">ScheduleInviteFriend</string>
     <string name="meeting_title">Meeting Title</string>
     <string name="meeting_location">Location</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
     <string name="done">Done</string>
     <string name="title_activity_accepted_event_view">AcceptedEventViewActivity</string>
     <string name="title_activity_dummy_event">DummyEventActivity</string>

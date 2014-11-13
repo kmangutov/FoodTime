@@ -3,6 +3,8 @@ package com.kmangutov.foodtime;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,14 +13,74 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
 public class MainActivity extends Activity {
+
+    private EditText input_start_time;
+    private EditText input_end_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.login_activity);
         setContentView(R.layout.login_activity);
+
+        input_start_time = (EditText) findViewById(R.id.inputStartTime);
+        input_end_time = (EditText) findViewById(R.id.inputEndTime);
+
+        //listeneer for inputStartTime
+        input_start_time.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                return;
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+                //test for invcalid time entries
+                String test_time = charSequence.toString();
+                if(test_time.length()>5)
+                {
+                    //invalid entry
+                }
+
+                int colon_placement = -1;
+                for(int j = 0; j < test_time.length(); j++)
+                {
+                    if(charSequence.charAt(j)==':')
+                    {
+                        colon_placement = j;
+                        break;
+                    }
+                }
+
+                if(colon_placement>1 || colon_placement==-1)
+                {
+                    //invalid entry or no entry
+                }
+
+
+                String before_colon = test_time.substring(0,colon_placement);
+                int before_colon_num = Integer.parseInt(before_colon);
+                String after_colon = test_time.substring(colon_placement+1, test_time.length());
+                int after_colon_num = Integer.parseInt(after_colon);
+
+                if(before_colon_num < 0 || before_colon_num > 24 || after_colon_num <0 || after_colon_num >59)
+                {
+                    //invalid entry
+                }
+                else
+                {
+                    //create dummy time
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 
