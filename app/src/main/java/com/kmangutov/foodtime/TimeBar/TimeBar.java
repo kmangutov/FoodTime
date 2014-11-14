@@ -198,7 +198,7 @@ public class TimeBar extends View {
 
         if(selected != null && slot == selected.slot) {
             drawPreciseTime(canvas, slot, paint, x1, y1, y2);
-            paint.setColor(Color.CYAN);
+            paint.setColor(Color.GRAY);
         } else {
             paint.setColor(slot.color);//Color.BLUE);
         }
@@ -213,11 +213,12 @@ public class TimeBar extends View {
                 y2,
                 paint);
 
-        paint.setColor(Color.BLACK);
 
         float dragSectionHeight = getDragSectionHeight(slot);
         float extremitySelectionThreshold = dragSectionHeight / slot.end - slot.start;
 
+        paint.setColor(Color.LTGRAY);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
 
         //draw top and bottom handle
         canvas.drawRect(
@@ -234,10 +235,37 @@ public class TimeBar extends View {
                 y2,
                 paint);
 
+
+
+        drawAffordanceBars(x1, y1, x2, y1 + dragSectionHeight, canvas, paint);
+
+        drawAffordanceBars(x1, y2 - dragSectionHeight, x2, y2, canvas, paint);
+
        /* if(clear_time)
         {
             clearFloatingTime(slot, canvas);
         }*/
+    }
+
+    protected void drawAffordanceBars(float x1, float y1, float x2, float y2, Canvas canvas, Paint paint) {
+
+        float w = x2 - x1;
+        float h = y2 - y1;
+
+        float myX1 = x1 + w/5.0f;
+        float myX2 = x2 - w/5.0f;
+
+        float myY1 = y1 + w/5.0f;
+        float myY2 = y2 - w/5.0f;
+
+        float myDY = (myY2 - myY1)/3;
+
+        paint.setColor(Color.BLACK);
+
+        for(int i = 0; i < 3; i++) {
+            float realY = myY1 + myDY * i;
+            canvas.drawLine(myX1, realY, myX2, realY, paint);
+        }
     }
 
     // convert fraction of timebar to hour:minute
