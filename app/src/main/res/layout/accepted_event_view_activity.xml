@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.kmangutov.foodtime.AcceptedEventViewActivity">
+    tools:context="com.kmangutov.foodtime.AcceptedEventViewActivity" android:onClick="finish">
 
     <TextView
         android:layout_width="match_parent"
@@ -19,7 +19,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/textEventName">
+        android:layout_alignLeft="@id/textEventName"
+            android:weightSum="1">
 
 
         <ImageView
@@ -68,9 +69,11 @@
             android:layout_below="@id/imageLocation"
             android:layout_marginLeft="5dp"
             android:id="@+id/imageYes" />
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="190dp"
+            android:layout_weight="0.4"
             android:layout_toRightOf="@id/imageYes"
             android:layout_alignTop="@id/imageYes"
             android:id="@+id/listViewYes"
@@ -90,11 +93,12 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="190dp"
+            android:layout_weight="0.4"
             android:layout_below="@id/listViewYes"
             android:layout_toRightOf="@id/imageNo"
             android:layout_alignTop="@id/imageNo"
             android:id="@+id/listViewNo"
-            android:layout_weight="0.02" />
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"

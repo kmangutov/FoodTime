@@ -43,7 +43,7 @@
                 android:id="@+id/friendListView"
                 android:layout_gravity="center_horizontal"
                 android:layout_alignParentTop="true"
-                android:stackFromBottom="false"/>
+                android:stackFromBottom="false" android:layout_above="@+id/but_delFriendList"/>
 
     </RelativeLayout>
     />

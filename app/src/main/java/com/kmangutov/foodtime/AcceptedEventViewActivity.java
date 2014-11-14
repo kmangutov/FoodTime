@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,10 +23,13 @@ public class AcceptedEventViewActivity extends Activity {
     ArrayList<String> friendNoList = new ArrayList<String>();
     String[] name_accepted = {"Jon", "Kirill", "Harrison"};
     String[] name_no = {"Borg","Isra"};
+    public final static String EVENTNAME_EXTRA="com.kmangutov.foodtime._EN";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accepted_event_view_activity);
+        setTitle("Review Meetup");
 
         name_accepted = new String[]{"Jon", "Kirill", "Harrison"};
         name_no = new String[]{"Borg","Isra"};
@@ -40,6 +45,9 @@ public class AcceptedEventViewActivity extends Activity {
                 android.R.layout.simple_list_item_1, friendNoList);
         myListView2.setAdapter(adapter2);
         friendNoList.addAll(Arrays.asList(name_no));
+
+        Intent intent = getIntent();
+        ((TextView) findViewById(R.id.textEventName)).setText(intent.getStringExtra("passed_eventname"));
     }
 
 
@@ -65,11 +73,12 @@ public class AcceptedEventViewActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void edit_button(){
+    public void edit_button(View v){
         startActivity(new Intent(this, SchedulingActivity.class));
     }
 
-    public void leave_button(){
+    public void leave_button(View v){
         //delete current event record
+        finish();
     }
 }

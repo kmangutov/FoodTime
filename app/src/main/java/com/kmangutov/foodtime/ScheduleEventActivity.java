@@ -1,21 +1,14 @@
 package com.kmangutov.foodtime;
 
 import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class ScheduleEventActivity extends Activity implements TabListener{
@@ -28,6 +21,7 @@ public class ScheduleEventActivity extends Activity implements TabListener{
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setTitle("Schedule a Meetup");
 //        setContentView(R.layout.activity_schedule_invite_friend);
 
         Tab inviteTab = actionBar.newTab();

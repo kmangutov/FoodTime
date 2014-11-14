@@ -32,7 +32,6 @@ public class HomeActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(getApplicationContext(), DummyEventActivity.class);
-
                 startActivity(intent);
             }
         });
@@ -44,7 +43,7 @@ public class HomeActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), AcceptedEventViewActivity.class);
-
+                intent.putExtra("passed_eventname", acceptedList.getItemAtPosition(i).toString());
                 startActivity(intent);
             }
         });
@@ -72,6 +71,7 @@ public class HomeActivity extends Activity {
     }
 
     public void scheduleMeeting(View v){
+
         startActivity(new Intent(HomeActivity.this, ScheduleEventActivity.class));
     }
 
