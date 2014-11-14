@@ -43,7 +43,7 @@ public class HomeActivity extends Activity {
         acceptedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), DummyEventActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AcceptedEventViewActivity.class);
 
                 startActivity(intent);
             }
