@@ -74,7 +74,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Accepted Friends"
+            android:text="Friends Confirmed"
             android:textSize="20dp"
             android:layout_marginLeft="2dp"
             android:layout_toRightOf="@id/imageYes"
@@ -84,6 +84,7 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="160dp"
+            android:layout_weight="0.4"
             android:layout_toRightOf="@id/imageYes"
             android:layout_below="@id/imageYes"
             android:id="@+id/listViewYes"
@@ -104,7 +105,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Maybe Friends"
+            android:text="Friends Yet To Reply"
             android:textSize="20dp"
             android:layout_marginLeft="2dp"
             android:layout_toRightOf="@id/imageNo"
@@ -114,10 +115,11 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="160dp"
+            android:layout_weight="0.4"
             android:layout_below="@id/imageNo"
             android:layout_toRightOf="@id/imageNo"
             android:id="@+id/listViewNo"
-            android:layout_weight="0.02" />
+         />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -129,7 +131,7 @@
             <Button
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="Leave"
+                android:text="Return"
                 android:onClick="leave_button"
                 android:id="@+id/buttonLeave"
                 android:background="#F0F0FF"
