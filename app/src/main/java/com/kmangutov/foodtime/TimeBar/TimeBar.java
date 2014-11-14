@@ -354,10 +354,13 @@ public class TimeBar extends View {
                 switch(selected.location)
                 {
                     case TOP:
-                        selected.slot.start = yFrac;
+
+                        if(yFrac < selected.slot.end)
+                            selected.slot.start = yFrac;
                         break;
                     case BOTTOM:
-                        selected.slot.end = yFrac;
+                        if(yFrac > selected.slot.start)
+                            selected.slot.end = yFrac;
                         break;
                     case MIDDLE:
                         System.out.println("MIDDLE SELECTED");
