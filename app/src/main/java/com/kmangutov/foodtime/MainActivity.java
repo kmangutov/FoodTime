@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-    private EditText input_start_time;
-    private EditText input_end_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +22,8 @@ public class MainActivity extends Activity {
         //setContentView(R.layout.login_activity);
         setContentView(R.layout.login_activity);
 
-        input_start_time = (EditText) findViewById(R.id.inputStartTime);
-        input_end_time = (EditText) findViewById(R.id.inputEndTime);
+        //input_start_time = (EditText) findViewById(R.id.inputStartTime);
+        //input_end_time = (EditText) findViewById(R.id.inputEndTime);
         int start_hour;
         int start_minute;
         int end_hour;
@@ -33,7 +31,7 @@ public class MainActivity extends Activity {
         boolean start = false;
         boolean end = false;
         //listener for inputStartTime
-        input_start_time.addTextChangedListener(new TextWatcher() {
+      /*  input_start_time.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 return;
@@ -154,7 +152,7 @@ public class MainActivity extends Activity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
     }
 
 
