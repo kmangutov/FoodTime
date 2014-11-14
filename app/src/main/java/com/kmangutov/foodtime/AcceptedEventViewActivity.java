@@ -48,6 +48,7 @@ public class AcceptedEventViewActivity extends Activity {
 
         Intent intent = getIntent();
         ((TextView) findViewById(R.id.textEventName)).setText(intent.getStringExtra("passed_eventname"));
+        //( (TextView) findViewById(R.id.textLocation)).setText(intent.getStringExtra("passed_eventname" )+ ", 204 E Green St, 61820");
     }
 
 

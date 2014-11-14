@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sun, Nov 16, 12:00 p.m. - 1:00 p.m."
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:layout_toRightOf="@id/imageCalendar"
             android:id="@+id/textTime"
             android:ems="14"
@@ -53,9 +53,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sakari Sushi, 204 E Green St, 61820"
+            android:text="204 E Green St, 61820"
             android:ems="14"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:layout_toRightOf="@id/imageLocation"
             android:id="@+id/textLocation"
             android:layout_below="@id/textTime"
@@ -63,13 +63,14 @@
 
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/come_icon"
             android:layout_below="@id/imageLocation"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="14dp"
-            android:id="@+id/imageYes" />
+            android:id="@+id/imageYes"
+            android:clickable="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,13 +94,14 @@
 
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="14dp"
             android:src="@drawable/maybe_icon"
             android:layout_below="@id/listViewYes"
-            android:id="@+id/imageNo" />
+            android:id="@+id/imageNo"
+            android:clickable="false" />
 
 
 
