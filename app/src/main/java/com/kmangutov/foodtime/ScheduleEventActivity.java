@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Vector;
+import android.view.View;
 
 public class ScheduleEventActivity extends Activity implements TabListener{
 
@@ -84,5 +86,8 @@ public class ScheduleEventActivity extends Activity implements TabListener{
 
     }
 
+    public void createEventButton(View v){
+        finish();
+    }
 
 }
