@@ -75,7 +75,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Friends Confirmed"
+            android:text="Friends Going"
             android:textSize="20dp"
             android:layout_marginLeft="2dp"
             android:textStyle="bold"
@@ -108,7 +108,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Friends Yet To Reply"
+            android:text="Friends To Reply"
             android:textSize="20dp"
             android:layout_marginLeft="2dp"
             android:layout_toRightOf="@id/imageNo"

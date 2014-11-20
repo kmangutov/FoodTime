@@ -13,6 +13,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Friend List"
+                android:textStyle="bold"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="6dp"
                 android:id="@+id/textView" android:autoText="false"
                 android:textSize="@dimen/header_text_size"/>
         <Space
@@ -20,9 +23,11 @@
                 android:layout_height="20px"
                 />
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add Friends"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="4dp"
+                android:text=" "
+                android:background="@drawable/add_people"
                 android:id="@+id/but_addFriendList" android:onClick="add_button"/>
     </LinearLayout>
     <RelativeLayout
@@ -32,10 +37,12 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remove Selected from Friend List"
+            android:text=" Remove from Friend List "
             android:id="@+id/but_delFriendList"
-            android:layout_gravity="center_horizontal"
+            android:background="#bb93dc"
+            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
             android:textSize="@dimen/regular_text_size"/>
         <ListView
                 android:layout_width="match_parent"

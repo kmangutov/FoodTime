@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:background="#F0F0FF"
+            android:background="#bb93dc"
             android:onClick="createEventButton"
             android:text="@string/done"/>
 

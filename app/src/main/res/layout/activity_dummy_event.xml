@@ -80,10 +80,10 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Accept and Submit"
+            android:text=" Accept and Submit "
             android:id="@+id/button"
             android:onClick="acceptEvent"
-            android:background="#F0F0FF"
+            android:background="#bb93dc"
             android:layout_alignParentBottom="true" android:layout_toLeftOf="@+id/eventTimeBar"
             android:layout_marginRight="40dp"/>
 
