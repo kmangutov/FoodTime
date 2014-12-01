@@ -12,11 +12,19 @@ import android.view.MenuItem;
 
 import java.util.Vector;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class ScheduleEventActivity extends Activity implements TabListener{
 
     Fragment f = null;
     InviteTabFragment tf = null;
+
+    //listeners for inputMeetingTitle and inputLocation
+    //reacts to "Done" which corresponds to but_schedule
+    Button mButton;
+    EditText mEdit0;
+    EditText mEdit1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +94,17 @@ public class ScheduleEventActivity extends Activity implements TabListener{
 
     }
 
+    //called when "Done" is pressed with id but_schedule
     public void createEventButton(View v){
+
+        //source: http://stackoverflow.com/questions/4531396/get-value-of-a-edit-text-field
+        mButton = (Button)findViewById(R.id.but_schedule);
+        mEdit0   = (EditText)findViewById(R.id.inputMeetingTitle);
+        mEdit1 = (EditText)findViewById(R.id.inputLocation);
+
+        System.out.println("inputMeetingTitle: " + mEdit0.getText().toString());
+        System.out.println("inputLocation: " + mEdit1.getText().toString());
+
         finish();
     }
 
