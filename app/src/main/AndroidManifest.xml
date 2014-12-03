@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kmangutov.foodtime" >
 
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="16" />
+
     <application
         android:name="com.kmangutov.foodtime.GlobalClass"
         android:allowBackup="true"
