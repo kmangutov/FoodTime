@@ -23,6 +23,7 @@
     </style>
 
     <style name="button_style">
+        <item name="android:layout_width">120dp</item>
         <item name="android:text">Remove from Friend List "</item>
         <item name="android:background">@color/color_button</item>
         <item name="android:textColor">@color/color_foreground</item>
@@ -30,7 +31,7 @@
         <item name="android:fontFamily">sans-serif-thin</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:layout_width">wrap_content</item>
+
         <item name="android:layout_height">wrap_content</item>
     </style>
 

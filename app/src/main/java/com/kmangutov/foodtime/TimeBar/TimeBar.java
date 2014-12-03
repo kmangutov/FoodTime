@@ -10,6 +10,8 @@ import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.kmangutov.foodtime.R;
+
 import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
@@ -22,6 +24,10 @@ public class TimeBar extends View {
     ArrayList<TimeSlot> mTimeSlots = new ArrayList<TimeSlot>();
     SlotSelection selected = null;
 
+    protected int fgColor = 0;
+    protected int fg2Color = 0;
+    protected int bgColor = 0;
+
     public TimeBar(Context context) {
         super(context);
     }
@@ -29,6 +35,13 @@ public class TimeBar extends View {
     public TimeBar(Context context, AttributeSet attrs) {
 
         super(context, attrs);
+        fgColor =
+                context.getResources().getColor(R.color.color_foreground);
+        bgColor =
+                context.getResources().getColor(R.color.color_background);
+        fg2Color =
+                context.getResources().getColor(R.color.color_foreground2);
+
         //addDummyTime(3, 15);
     }
 
@@ -109,7 +122,7 @@ public class TimeBar extends View {
         LocalTime start = new LocalTime(hour, minute);
         LocalTime end = new LocalTime(hour + 2, minute + 30);
         TimeSlot slot = new TimeSlot(timeToFraction(start), timeToFraction(end));
-        slot.setColor(color);
+        slot.setColor(fg2Color);//color);
 
         addTimeSlot(slot);
     }
@@ -136,7 +149,7 @@ public class TimeBar extends View {
         paint.setAlpha(255);
 
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.BLUE);
+        paint.setColor(fgColor);
         paint.setStrokeWidth(4);
 
         for(TimeSlot slot : mTimeSlots) {
@@ -168,7 +181,7 @@ public class TimeBar extends View {
 
 
         paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.BLACK);
+        paint.setColor(fg2Color);
         paint.setAlpha(255);
         paint.setStrokeWidth(4);
 
@@ -180,7 +193,7 @@ public class TimeBar extends View {
 
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(1);
-        paint.setColor(Color.BLACK);
+        paint.setColor(fg2Color);
 
         canvas.drawText(startStr, myX, y1 - yOffset, paint);
         canvas.drawText(endStr, myX, y2 - yOffset, paint);
@@ -198,9 +211,9 @@ public class TimeBar extends View {
 
         if(selected != null && slot == selected.slot) {
             drawPreciseTime(canvas, slot, paint, x1, y1, y2);
-            paint.setColor(Color.GRAY);
+            paint.setColor(fgColor);
         } else {
-            paint.setColor(slot.color);//Color.BLUE);
+            paint.setColor(fg2Color);//slot.color);//Color.BLUE);
         }
 
 
