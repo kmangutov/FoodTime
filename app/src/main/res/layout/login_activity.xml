@@ -70,17 +70,16 @@
                 />
 
             <Button
-                style="?android:attr/buttonStyleSmall"
+                style="@style/button_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Log In"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/buttonSubmit"
-                android:textSize="18dp"
                 android:onClick="login_button"
                 android:clickable="true"
-                android:layout_below="@id/password_input"
                 android:layout_centerHorizontal="true"
+                android:layout_below="@id/password_input"
                 android:layout_marginTop="26dp"/>
 
             <TextView
