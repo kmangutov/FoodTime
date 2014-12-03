@@ -75,7 +75,8 @@ public class AcceptedEventViewActivity extends Activity {
     }
 
     public void edit_button(View v){
-        startActivity(new Intent(this, SchedulingActivity.class));
+
+        startActivity(new Intent(this, ScheduleEventActivity.class));
     }
 
     public void leave_button(View v){
