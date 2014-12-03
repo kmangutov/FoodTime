@@ -9,12 +9,12 @@
     tools:context="com.kmangutov.foodtime.ScheduleEventActivity">
 
     <TextView
+        style="@style/style_text.big"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Schedule Meetup: Invite Friends"
         android:id="@+id/textScheduleMeetup"
-        android:textSize="22dp"
      />
 
     <ListView

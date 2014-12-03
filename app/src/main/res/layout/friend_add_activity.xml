@@ -9,13 +9,14 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp" android:layout_weight="0.8">
         <TextView
+                style="@style/style_text.big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recommended Friends:"
                 android:id="@+id/tex_recF"
                 android:textStyle="bold"
                 android:layout_marginLeft="6dp"
-                android:textSize="@dimen/header_text_size" android:textIsSelectable="false"/>
+                android:textIsSelectable="false"/>
         <ListView
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
@@ -42,6 +43,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.2" android:layout_gravity="bottom">
         <TextView
+                style="@style/style_text.big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Find FoodTime ID:"

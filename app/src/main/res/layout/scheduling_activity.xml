@@ -9,6 +9,7 @@
                 tools:context=".MainActivity">
 
     <TextView
+            style="@style/style_text"
             android:id="@+id/twHw"
             android:text="Set your time"
             android:layout_width="wrap_content"

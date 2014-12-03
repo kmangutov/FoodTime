@@ -41,6 +41,7 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/style_text.big"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/meeting_title"/>
@@ -52,6 +53,7 @@
                 android:layout_marginBottom="20dp"/>
 
             <TextView
+                style="@style/style_text.big"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/meeting_location"/>

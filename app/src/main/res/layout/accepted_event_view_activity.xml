@@ -5,14 +5,11 @@
     tools:context="com.kmangutov.foodtime.AcceptedEventViewActivity" android:onClick="finish">
 
     <TextView
+        style="@style/style_text.big"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" Sakari Sushi"
-        android:textSize="22dp"
-        android:fontFamily="sans-serif"
+        android:text=" Sakari Sushi"        android:fontFamily="sans-serif"
         android:id="@+id/textEventName"
-        android:background="#FF9933"
-        android:textColor="#ffffff"
         android:editable="false"/>
 
 
@@ -31,10 +28,10 @@
             android:src="@drawable/calendar_icon"
             android:layout_marginTop="2dp"/>
         <TextView
+            style="@style/style_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sun, Nov 16, 12:00 p.m. - 1:00 p.m."
-            android:textSize="15dp"
             android:layout_toRightOf="@id/imageCalendar"
             android:id="@+id/textTime"
             android:ems="14"
@@ -51,6 +48,7 @@
             android:layout_marginTop="2dp"/>
 
         <TextView
+            style="@style/style_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="204 E Green St, 61820"
@@ -73,10 +71,10 @@
             android:clickable="false" />
 
         <TextView
+            style="@style/style_text.big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Friends Going"
-            android:textSize="20dp"
             android:layout_marginLeft="2dp"
             android:textStyle="bold"
             android:layout_toRightOf="@id/imageYes"
@@ -106,10 +104,10 @@
 
 
         <TextView
+            style="@style/style_text.big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Friends To Reply"
-            android:textSize="20dp"
             android:layout_marginLeft="2dp"
             android:layout_toRightOf="@id/imageNo"
             android:layout_alignTop="@id/imageNo"
