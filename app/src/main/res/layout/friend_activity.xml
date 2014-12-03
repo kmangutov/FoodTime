@@ -23,11 +23,11 @@
                 android:layout_height="20px"
                 />
         <Button
+                style="@style/button_style"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginTop="4dp"
                 android:text=" "
-                android:background="@drawable/add_people"
                 android:id="@+id/but_addFriendList" android:onClick="add_button"/>
     </LinearLayout>
     <RelativeLayout
@@ -35,15 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <Button
+            style="@style/button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Remove from Friend List "
             android:id="@+id/but_delFriendList"
-            android:background="#bb93dc"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:textSize="@dimen/regular_text_size"/>
+            android:layout_marginBottom="10dp"/>
         <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

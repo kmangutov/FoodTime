@@ -133,20 +133,20 @@
             android:layout_below="@id/listViewNo">
 
             <Button
+                style="@style/button_style"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:text="Return"
                 android:onClick="leave_button"
                 android:id="@+id/buttonLeave"
-                android:background="#F0F0FF"
                 android:layout_gravity="center_horizontal" />
 
             <Button
+                style="@style/button_style"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/buttonLeave"
-                android:background="#F0F0FF"
                 android:onClick="edit_button"
                 android:text="Edit"
                 android:id="@+id/buttonEdit" />
