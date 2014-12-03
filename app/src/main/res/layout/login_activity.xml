@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/color_background"
     android:weightSum="5">
 
     <ImageView
@@ -98,12 +98,12 @@
                 android:layout_height="wrap_content"
                 android:text="Get Started!"
                 android:fontFamily="sans-serif-light"
-                android:textSize="18dp"
                 android:clickable="true"
                 android:layout_centerHorizontal="true"
                 android:onClick="new_user_button"
                 android:layout_marginBottom="65dp"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true"
+                style="@style/button_style"/>
         </RelativeLayout>
     </LinearLayout>
 

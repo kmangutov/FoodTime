@@ -19,7 +19,7 @@
 
     <style name="button_style">
         <item name="android:text">Remove from Friend List "</item>
-        <item name="android:background">@color/color_background</item>
+        <item name="android:background">@color/color_button</item>
         <item name="android:textColor">@color/color_foreground</item>
         <item name="android:typeface">monospace</item>
         <item name="android:fontFamily">sans-serif-thin</item>
