@@ -13,9 +13,9 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Username ID:"
+                android:text="Username ID"
                 android:id="@+id/reg_tusername" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
-                android:textSize="@dimen/header_text_size"/>
+                style="@style/style_text.big"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
