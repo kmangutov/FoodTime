@@ -114,7 +114,7 @@ public class ScheduleEventActivity extends Activity implements TabListener{
 
         if(slot == null) {
 
-            Toast.makeText(this, "Invalid timeslot", Toast.LENGTH_LONG);
+            Toast.makeText(this, "Invalid timeslot", Toast.LENGTH_LONG).show();
             return;
         }
 
