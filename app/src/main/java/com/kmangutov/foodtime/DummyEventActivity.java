@@ -1,6 +1,7 @@
 package com.kmangutov.foodtime;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,10 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.kmangutov.foodtime.TimeBar.TimeBar;
 
+import java.util.ArrayList;
+
 
 public class DummyEventActivity extends Activity {
 
-    String[] friends = {"Isra", "Borg", "Kirill"};
+    //String[] friends = {"Isra", "Borg", "Kirill"};
+    ArrayList<String> friendListStr = new ArrayList<String>();
+    ArrayList<User> friendList = new ArrayList<User>();
     private ListView friendsList;
     private ArrayAdapter friendArrayAdapter;
 
@@ -23,8 +28,20 @@ public class DummyEventActivity extends Activity {
         setContentView(R.layout.activity_dummy_event);
         setTitle("Accept This Invitation?");
 
+        Intent intent = getIntent();
+        int event_index = intent.getIntExtra("eventIndex",0);
+
+        GlobalClass vars = (GlobalClass) getApplicationContext();
+        Event event = vars.getEventList().get(event_index);
+
+        friendList = event.getAcceptedFriends();
+        //Need the String version of invited friend names, so take them out...
+        for (int i=0; i<friendList.size(); ++i) {
+            friendListStr.add(friendList.get(i).getName().toString());
+        }
+
         friendsList = (ListView)findViewById(R.id.friendListView);
-        friendArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, friends);
+        friendArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, friendListStr);
         friendsList.setAdapter(friendArrayAdapter);
         TimeBar tb = (TimeBar) findViewById(R.id.eventTimeBar);
         tb.addDummyTime(12, 15, Color.GREEN);
@@ -54,6 +71,16 @@ public class DummyEventActivity extends Activity {
     }
 
     public void acceptEvent(View v) {
+
+
+        Intent intent = getIntent();
+        int event_index = intent.getIntExtra("eventIndex",0);
+
+        GlobalClass vars = (GlobalClass) getApplicationContext();
+        Event event = vars.getEventList().get(event_index);
+
+        event.moveToAcceptedFriends(vars.getUser());
+
         finish();
     }
 }

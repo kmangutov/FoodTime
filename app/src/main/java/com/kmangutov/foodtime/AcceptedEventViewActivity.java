@@ -8,10 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Chihiro on 11/4/2014.
@@ -19,10 +17,12 @@ import java.util.Arrays;
 
 public class AcceptedEventViewActivity extends Activity {
 
-    ArrayList<String> friendAcceptedList = new ArrayList<String>();
-    ArrayList<String> friendNoList = new ArrayList<String>();
-    String[] name_accepted = {"Jon", "Kirill", "Harrison"};
-    String[] name_no = {"Borg","Isra"};
+    ArrayList<User> friendAcceptedList = new ArrayList<User>();
+    ArrayList<User> friendNoList = new ArrayList<User>();
+    ArrayList<String> friendAcceptedListStr = new ArrayList<String>();
+    ArrayList<String> friendNoListStr = new ArrayList<String>();
+    //String[] name_accepted = {"Jon", "Kirill", "Harrison"};
+    //String[] name_no = {"Borg","Isra"};
     public final static String EVENTNAME_EXTRA="com.kmangutov.foodtime._EN";
 
     @Override
@@ -31,23 +31,39 @@ public class AcceptedEventViewActivity extends Activity {
         setContentView(R.layout.accepted_event_view_activity);
         setTitle("Review Meetup");
 
-        name_accepted = new String[]{"Jon", "Kirill", "Harrison"};
-        name_no = new String[]{"Borg","Isra"};
+        Intent intent = getIntent();
+        int event_index = intent.getIntExtra("eventIndex",0);
+
+        //name_accepted = new String[]{"Jon", "Kirill", "Harrison"};
+        //name_no = new String[]{"Borg","Isra"};
+        GlobalClass vars = (GlobalClass) getApplicationContext();
+        Event event = vars.getEventList().get(event_index);
+
+        friendAcceptedList = event.getAcceptedFriends();
+        friendNoList = event.getWaitingFriends();
+
+        //Need the String version of invited friend names, so take them out...
+        for (int i=0; i<friendAcceptedList.size(); ++i) {
+            friendAcceptedListStr.add(friendAcceptedList.get(i).getName().toString());
+        }
+        for (int i=0; i<friendNoList.size(); ++i) {
+            friendNoListStr.add(friendNoList.get(i).getName().toString());
+        }
 
         ListView myListView1 = (ListView)findViewById(R.id.listViewYes);
         final ArrayAdapter adapter1 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, friendAcceptedList);
+                android.R.layout.simple_list_item_1, friendAcceptedListStr);
         myListView1.setAdapter(adapter1);
-        friendAcceptedList.addAll(Arrays.asList(name_accepted));
+        //friendAcceptedList.addAll(Arrays.asList(name_accepted));
 
         ListView myListView2 = (ListView)findViewById(R.id.listViewNo);
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, friendNoList);
+                android.R.layout.simple_list_item_1, friendNoListStr);
         myListView2.setAdapter(adapter2);
-        friendNoList.addAll(Arrays.asList(name_no));
+        //friendNoList.addAll(Arrays.asList(name_no));
 
-        Intent intent = getIntent();
-        ((TextView) findViewById(R.id.textEventName)).setText(intent.getStringExtra("passed_eventname"));
+
+        //((TextView) findViewById(R.id.textEventName)).setText(intent.getStringExtra("passed_eventname"));
         //( (TextView) findViewById(R.id.textLocation)).setText(intent.getStringExtra("passed_eventname" )+ ", 204 E Green St, 61820");
     }
 

@@ -107,6 +107,7 @@ public class FriendAddActivity extends Activity {
                     if(user.isSelected()){
                         responseText.append("\n" + user.getName());
                         vars.getUser().addFriend(user);
+                        user.addFriend(vars.getUser());
                     }
                 }
 
@@ -142,6 +143,7 @@ public class FriendAddActivity extends Activity {
             if(user.getUsername().compareTo(friend)==0){
                 responseText.append("\n" + user.getName());
                 vars.getUser().addFriend(user);
+                user.addFriend(vars.getUser());
             }
         }
 

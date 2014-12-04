@@ -10,8 +10,8 @@ public class Event {
     private String location;
     private Date startTime;
     private Date endTime;
-    private ArrayList<User> waitingFriends;
-    private ArrayList<User> acceptedFriends;
+    private ArrayList<User> waitingFriends = new ArrayList<User>();
+    private ArrayList<User> acceptedFriends = new ArrayList<User>();
 
     public Event(String title, String location){
         this.title = title;
@@ -73,6 +73,8 @@ public class Event {
         return this. waitingFriends;
     }
 
+    public void addWaitingFriends(User user) {waitingFriends.add(user);}
+
     public void setAcceptedFriends(ArrayList<User> acceptedFriends){
         this.acceptedFriends = acceptedFriends;
     }
@@ -80,6 +82,28 @@ public class Event {
     public ArrayList<User> getAcceptedFriends(){
         return  this.acceptedFriends;
     }
+
+    public void addAcceptedFriends(User user) {acceptedFriends.add(user);}
+
+    //Move from accepted to waiting
+    public void moveToWaitingFriends(User user) {
+        if (acceptedFriends.contains(user)){
+            acceptedFriends.remove(user);
+            waitingFriends.add(user);
+        }
+
+    }
+
+    //Move from waiting to accepted
+    public void moveToAcceptedFriends(User user) {
+        if (waitingFriends.contains(user)){
+            waitingFriends.remove(user);
+            acceptedFriends.add(user);
+        }
+    }
+
+
+
 
 
 }
