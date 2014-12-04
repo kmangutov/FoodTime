@@ -22,8 +22,9 @@ public class GlobalClass extends Application {
     //Simple initialize just for testing
     public GlobalClass(){
         //Generate fake pre-existing user db (temporary)
+        User temp_user =new User("placeholder");
         if (userList.isEmpty()) {
-            userList.add(new User("test", "test", "Jon", "Behind You, IL"));
+            userList.add(temp_user = new User("test", "test", "Jon", "Behind You, IL"));
             userList.add(new User("test1", "test", "Borg", "Urbana, IL"));
             userList.add(new User("test2", "test", "Harrison", "Champaign, IL"));
             userList.add(new User("smthn1", "pass", "Kirill", "Urbana, IL"));
@@ -31,6 +32,10 @@ public class GlobalClass extends Application {
             userList.add(new User("something2", "pass", "Xi", "Champaign, IL"));
         }
 
+        //Generate fake pre-existing friendlist for convenience of DEMOing
+        temp_user.addFriend(userList.get(1));
+        temp_user.addFriend(userList.get(2));
+        temp_user.addFriend(userList.get(3));
 
         //Generate fake pre-existing events
         String str1 = "2014.December.13 07:00 PM";

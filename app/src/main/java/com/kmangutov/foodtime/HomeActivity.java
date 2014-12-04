@@ -10,13 +10,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 
 public class HomeActivity extends Activity {
 
-    //ArrayList<String> invitedArray;
-    String[] invitedArray= { "Papa Johns - Friday", "Quiznos - Saturday" };
-    //ArrayList<String> acceptedArray;
-    String[] acceptedArray = { "Sakari Sushi - Sunday", "Fro Yo - Sunday" };
+    ArrayList<String> invitedArray = new ArrayList<String>();
+    //String[] invitedArray= { "Papa Johns - Friday", "Quiznos - Saturday" };
+    ArrayList<String> acceptedArray = new ArrayList<String>();
+    //String[] acceptedArray = { "Sakari Sushi - Sunday", "Fro Yo - Sunday" };
     private ListView acceptedList, invitedList;
     private ArrayAdapter invitedArrayAdapter, acceptedArrayAdapter;
 
@@ -26,16 +30,28 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        /*
+
+        populateEvents();
+
+
+    }
+
+    private void populateEvents() {
         GlobalClass vars = (GlobalClass) getApplicationContext();
         User me = vars.getUser();
         ArrayList<Event> eventList = vars.getEventList();
+
+        invitedArray.clear();
+        acceptedArray.clear();
+
+        Format formatter = new SimpleDateFormat("EEE hh:mm aaa");
+
         for (int i=0; i<eventList.size(); ++i) {
             if (eventList.get(i).getWaitingFriends().contains(me))
-                invitedArray.add(eventList.get(i).getTitle()+" - "+eventList.get(i).getStartTime().toString());
+                invitedArray.add(eventList.get(i).getTitle()+" - "+formatter.format(eventList.get(i).getStartTime()));
             else if (eventList.get(i).getAcceptedFriends().contains(me))
-                acceptedArray.add(eventList.get(i).getTitle()+" - "+eventList.get(i).getStartTime().toString());
-        }*/
+                acceptedArray.add(eventList.get(i).getTitle()+" - "+formatter.format(eventList.get(i).getStartTime()));
+        }
 
         invitedList = (ListView) findViewById(R.id.invited_list);
         invitedArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, invitedArray);
@@ -45,6 +61,7 @@ public class HomeActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(getApplicationContext(), DummyEventActivity.class);
+                intent.putExtra("eventIndex", i);
                 startActivity(intent);
             }
         });
@@ -52,16 +69,25 @@ public class HomeActivity extends Activity {
         acceptedList = (ListView) findViewById(R.id.accepted_list);
         acceptedArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, acceptedArray);
         acceptedList.setAdapter(acceptedArrayAdapter);
+
         acceptedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), AcceptedEventViewActivity.class);
-                intent.putExtra("passed_eventname", acceptedList.getItemAtPosition(i).toString());
+                //intent.putExtra("passed_eventname", acceptedList.getItemAtPosition(i).toString());
+                intent.putExtra("eventIndex", i);
                 startActivity(intent);
             }
         });
-
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Update the darn lists when you return to the main home screen from somewhere (especially via the RETURN/BACK button)
+        populateEvents();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -9,19 +9,20 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.util.Vector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.kmangutov.foodtime.TimeBar.TimeBar;
 import com.kmangutov.foodtime.TimeBar.TimeBarUpdateListener;
 import com.kmangutov.foodtime.TimeBar.TimeSlot;
-
 import org.joda.time.LocalTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ScheduleEventActivity extends Activity implements TabListener, TimeBarUpdateListener {
 
@@ -36,6 +37,9 @@ public class ScheduleEventActivity extends Activity implements TabListener, Time
     TimeBar mTimeBar;
     TextView mStartTime;
     TextView mEndTime;
+
+    boolean startAM;
+    boolean endAM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +135,13 @@ public class ScheduleEventActivity extends Activity implements TabListener, Time
         int end_hour = end_time.getHourOfDay();
         int end_minute = end_time.getMinuteOfHour();
 
-        start_hour = (start_hour == 12)?12:(start_hour % 12);;
+        if (start_hour>=12) startAM=false;
+        else startAM=true;
+
+        if (end_hour>=12) endAM=false;
+        else endAM=true;
+
+        start_hour = (start_hour == 12)?12:(start_hour % 12);
         end_hour = (end_hour == 12)?12:(end_hour % 12);
 
         String start_minute_str = Integer.toString(start_minute);
@@ -177,6 +187,37 @@ public class ScheduleEventActivity extends Activity implements TabListener, Time
         System.out.println("inputLocation: " + mEdit1.getText());
         System.out.println("Start Time: " + start_hour + ":" + start_minute);
         System.out.println("End Time: " + end_hour + ":" + end_minute);
+
+        //CURRENT DATE???
+        Date date = new Date();
+        String modifiedDate= new SimpleDateFormat("yyyy.MMMM.dd").format(date);
+        String startStDate = modifiedDate+" "+String.format("%2d",start_hour)+":"+String.format("%2d",start_minute)+" "+(startAM?"AM":"PM");
+        String endStDate = modifiedDate+" "+String.format("%2d",start_hour)+":"+String.format("%2d",start_minute)+" "+(endAM?"AM":"PM");
+        Date startDate = null;
+        Date endDate=null;
+        try {
+            startDate = new SimpleDateFormat("yyyy.MMMM.dd hh:mm aaa", Locale.ENGLISH).parse(startStDate);
+            endDate = new SimpleDateFormat("yyyy.MMMM.dd hh:mm aaa", Locale.ENGLISH).parse(endStDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //Finally create the event Obj and add it to the EVENTS DB
+        GlobalClass vars = (GlobalClass) getApplicationContext();
+
+        Event event = new Event(mEdit0.getText().toString(),mEdit1.getText().toString(),startDate, endDate);
+        //We have alraedy invited and accepted ourselves cuz... well y'know
+        event.addAcceptedFriends(vars.getUser());
+        //TODO: GET THE ARRAYLIST OF SELECTED FRIENDS FROM LIST, AND JUST SLAP IT ON TO SETWAITINGFRIENDS, and that shud be it
+        //event.setWaitingFriends();
+        //TEMPORARY CODE INVITING EVERYONE U KNOW:
+        event.setWaitingFriends(vars.getUser().getFriendList());
+
+        //ADD NEW EVENT TO EVENTS DB
+        vars.getEventList().add(event);
+
+        //Unticks everyone, because the tick can carry over to friendlist activity, etc. wow shit code
+        ((GlobalClass)getApplicationContext()).unsetAll();
 
         finish();
     }
