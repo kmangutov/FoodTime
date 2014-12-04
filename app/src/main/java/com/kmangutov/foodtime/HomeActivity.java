@@ -13,7 +13,9 @@ import android.widget.ListView;
 
 public class HomeActivity extends Activity {
 
-    String[] invitedArray = { "Papa Johns - Friday", "Quiznos - Saturday" };
+    //ArrayList<String> invitedArray;
+    String[] invitedArray= { "Papa Johns - Friday", "Quiznos - Saturday" };
+    //ArrayList<String> acceptedArray;
     String[] acceptedArray = { "Sakari Sushi - Sunday", "Fro Yo - Sunday" };
     private ListView acceptedList, invitedList;
     private ArrayAdapter invitedArrayAdapter, acceptedArrayAdapter;
@@ -23,6 +25,17 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        /*
+        GlobalClass vars = (GlobalClass) getApplicationContext();
+        User me = vars.getUser();
+        ArrayList<Event> eventList = vars.getEventList();
+        for (int i=0; i<eventList.size(); ++i) {
+            if (eventList.get(i).getWaitingFriends().contains(me))
+                invitedArray.add(eventList.get(i).getTitle()+" - "+eventList.get(i).getStartTime().toString());
+            else if (eventList.get(i).getAcceptedFriends().contains(me))
+                acceptedArray.add(eventList.get(i).getTitle()+" - "+eventList.get(i).getStartTime().toString());
+        }*/
 
         invitedList = (ListView) findViewById(R.id.invited_list);
         invitedArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, invitedArray);

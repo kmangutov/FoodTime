@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 
 import java.util.ArrayList;
 
@@ -26,10 +23,19 @@ public class FriendAddActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_add_activity);
 
+        /*
+
+        CAVEATS:
+        for now, just have every single user show up on the recommended friends screen.
+        Also, befriending a person, automatically adds yourself to the other person's list too. Same goes for removal.
+
+         */
         GlobalClass vars = (GlobalClass) getApplicationContext();
         ArrayList<User> userList = vars.getUserList();
-        friendList = vars.getFriendList();
+        friendList = vars.getUser().getFriendList();
         for(int i=0; i<userList.size(); ++i) {
+            if (userList.get(i)==vars.getUser()) continue;
+
             if (!friendList.contains(userList.get(i))) {
                 recList.add(userList.get(i));
             }
@@ -100,7 +106,7 @@ public class FriendAddActivity extends Activity {
                     User user = recList.get(i);
                     if(user.isSelected()){
                         responseText.append("\n" + user.getName());
-                        vars.getFriendList().add(user);
+                        vars.getUser().addFriend(user);
                     }
                 }
 
@@ -113,6 +119,39 @@ public class FriendAddActivity extends Activity {
 
             }
         });
+
+
+
+    }
+
+    public void addSingle(View v) {
+
+        //TODO: Prompt the User
+
+
+        String friend = ((EditText)findViewById(R.id.edit_addbyid)).getText().toString();
+
+        StringBuffer responseText = new StringBuffer();
+        responseText.append("Added the following:\n");
+
+        GlobalClass vars = (GlobalClass) getApplicationContext();
+        ArrayList<User> recList = adapter.userList;
+
+        for(int i=0;i<recList.size();i++){
+            User user = recList.get(i);
+            if(user.getUsername().compareTo(friend)==0){
+                responseText.append("\n" + user.getName());
+                vars.getUser().addFriend(user);
+            }
+        }
+
+        ((GlobalClass)getApplicationContext()).unsetAll();
+
+        Toast.makeText(getApplicationContext(),
+                responseText, Toast.LENGTH_LONG).show();
+
+        finish();
+
 
 
 

@@ -2,15 +2,12 @@ package com.kmangutov.foodtime;
 
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 /**
@@ -51,7 +48,7 @@ public class InviteTabFragment extends Fragment {
         //ArrayAdapter for friendList array
         ListView myListView = (ListView) getActivity().findViewById(R.id.friendInviteListView);
         adapter = new FriendListAdapter(getActivity(),
-                R.layout.friend_checkbox_layout, vars.getFriendList());
+                R.layout.friend_checkbox_layout, vars.getUser().getFriendList());
         ListView listView = (ListView) v.findViewById(R.id.friendInviteListView);
 
         listView.setAdapter(adapter);
