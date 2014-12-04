@@ -21,7 +21,8 @@ public class MainActivity extends Activity {
         //setContentView(R.layout.login_activity);
         setContentView(R.layout.login_activity);
 
-
+        GlobalClass vars = (GlobalClass) getApplicationContext();
+        vars.setUser(null);
 
         //input_start_time = (EditText) findViewById(R.id.inputStartTime);
         //input_end_time = (EditText) findViewById(R.id.inputEndTime);
@@ -201,6 +202,7 @@ public class MainActivity extends Activity {
             for(int i=0; i<userList.size(); ++i) {
                 Log.w("debug", userList.get(i).username +","+ userList.get(i).checkPassword(password));
                 if (userList.get(i).username.compareTo(username)==0 && userList.get(i).checkPassword(password)) {
+                    vars.setUser(userList.get(i));
                     startActivity(new Intent(MainActivity.this, HomeActivity.class));
                     return;
                 }

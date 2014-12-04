@@ -51,7 +51,7 @@ public class FriendActivity extends Activity {
         //ArrayAdapter for friendList array
         ListView myListView = (ListView) findViewById(R.id.friendListView);
         adapter = new FriendListAdapter(this,
-                R.layout.friend_checkbox_layout, vars.getFriendList());
+                R.layout.friend_checkbox_layout, vars.getUser().getFriendList());
         ListView listView = (ListView) findViewById(R.id.friendListView);
 
         listView.setAdapter(adapter);

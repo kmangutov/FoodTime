@@ -13,11 +13,10 @@
         <TextView
                 style="@style/style_text.big"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="43dp"
                 android:text="Friend List"
                 android:textStyle="bold"
                 android:layout_marginLeft="6dp"
-                android:layout_marginTop="6dp"
                 android:id="@+id/textView" android:autoText="false"/>
         <Space
                 android:layout_width="20px"
@@ -25,12 +24,15 @@
                 />
         <Button
                 style="@style/button_style"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="4dp"
-                android:text=" "
-                android:id="@+id/but_addFriendList" android:onClick="add_button"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Search + Add Friends"
+                android:id="@+id/but_addFriendList" android:onClick="add_button" android:layout_marginTop="4dp"/>
     </LinearLayout>
+    <Space
+            android:layout_width="20px"
+            android:layout_height="20px"
+            />
     <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -49,8 +51,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/friendListView"
                 android:layout_gravity="center_horizontal"
-                android:layout_alignParentTop="true"
-                android:stackFromBottom="false" android:layout_above="@+id/but_delFriendList"/>
+                android:stackFromBottom="false" android:layout_above="@+id/but_delFriendList"
+                android:layout_alignParentTop="true"/>
 
     </RelativeLayout>
     />

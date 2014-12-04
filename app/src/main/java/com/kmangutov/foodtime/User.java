@@ -1,5 +1,7 @@
 package com.kmangutov.foodtime;
 
+import java.util.ArrayList;
+
 /**
  * Created by Jonathan on 11/8/2014.
  */
@@ -11,11 +13,13 @@ public class User {
     String location = null;
     //Used for checkbox lists?
     Boolean selected= false;
+    public ArrayList<User> friendList;
 
     public User(String name)
     {
         this.name = name;
         this.username = name;
+        friendList = new ArrayList<User>();
     }
     public User(String username, String password, String name, String location) {
         super();
@@ -23,6 +27,7 @@ public class User {
         this.password = password;
         this.name = name;
         this.location = location;
+        friendList = new ArrayList<User>();
     }
 
     public String getUsername() {
@@ -61,5 +66,17 @@ public class User {
 
     public void setSelected(boolean b) {
         this.selected = b;
+    }
+
+    public void addFriend(User user) {
+        friendList.add(user);
+    }
+
+    public void removeFriend(User user) {
+        friendList.remove(user);
+    }
+
+    public ArrayList<User> getFriendList() {
+        return friendList;
     }
 }

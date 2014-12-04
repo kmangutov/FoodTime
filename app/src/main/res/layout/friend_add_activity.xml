@@ -54,19 +54,24 @@
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
+
             <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText"
-                    android:minWidth="220sp" android:textSize="@dimen/regular_text_size" android:textIsSelectable="true"/>
+                    android:id="@+id/edit_addbyid"
+                    android:inputType="text"
+                    android:minWidth="220sp"
+                    android:textSize="@dimen/regular_text_size"
+                    android:textIsSelectable="true"/>
             <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="#bb93dc"
                     android:text="Find and Add"
+                    android:onClick="addSingle"
                     android:layout_alignLeft = "@id/but_addlist"
                     android:layout_marginRight="10dp"
-                    android:id="@+id/buy_addsingle" android:textSize="@dimen/regular_text_size"/>
+                    android:id="@+id/but_addsingle" android:textSize="@dimen/regular_text_size"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
