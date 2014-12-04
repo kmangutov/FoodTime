@@ -52,6 +52,13 @@ public class TimeBar extends View {
     //protected float extremitySelectionThreshold = 0.2f;
     protected float mDesiredDragSectionHeight = 50f;
 
+    public TimeSlot getTimeSlot() {
+
+        if(mTimeSlots == null || mTimeSlots.size() == 0)
+            return null;
+        return mTimeSlots.get(0);
+    }
+
     protected float getDragSectionHeight(TimeSlot slot) {
         float slotHeight = (slot.end - slot.start) * getHeight();
         float halfSlotHeight = slotHeight / 2;
