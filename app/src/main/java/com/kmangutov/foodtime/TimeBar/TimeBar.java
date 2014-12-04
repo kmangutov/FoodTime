@@ -423,8 +423,8 @@ public class TimeBar extends View {
                         break;
                 }
 
-                if(listener != null)
-                    listener.timeBarUpdate();
+
+                ((TimeBarUpdateListener)this.getContext()).timeBarUpdate();
                 //System.out.println("ACTION_MOVE");
                 break;
 
