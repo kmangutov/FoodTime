@@ -14,6 +14,7 @@ import java.util.Vector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kmangutov.foodtime.TimeBar.TimeBar;
@@ -32,6 +33,8 @@ public class ScheduleEventActivity extends Activity implements TabListener{
     EditText mEdit0;
     EditText mEdit1;
     TimeBar mTimeBar;
+    TextView mStartTime;
+    TextView mEndTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +104,32 @@ public class ScheduleEventActivity extends Activity implements TabListener{
 
     }
 
+    //update start time and end time TextView elements in fragment_time.xml
+    public void updateTimes(View v) {
+        mStartTime = (TextView)findViewById(R.id.start_time);
+        mEndTime = (TextView)findViewById(R.id.end_time);
+        mTimeBar = (TimeBar)findViewById(R.id.timeBar);
+        TimeSlot slot = mTimeBar.getTimeSlot();
+
+        if(slot == null) {
+
+            Toast.makeText(this, "Invalid timeslot", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        LocalTime start_time = slot.getBeginTime();
+        LocalTime end_time = slot.getEndTime();
+
+        int start_hour = start_time.getHourOfDay();
+        int start_minute = start_time.getMinuteOfHour();
+        int end_hour = end_time.getHourOfDay();
+        int end_minute = end_time.getMinuteOfHour();
+
+        mStartTime.setText("Start Time: " + start_hour + ":" + start_minute);
+        mEndTime.setText("End Time: " + end_hour + ":" + end_minute);
+    }
+
     //called when "Done" is pressed with id but_schedule
     public void createEventButton(View v){
 
@@ -108,6 +137,7 @@ public class ScheduleEventActivity extends Activity implements TabListener{
         mButton = (Button)findViewById(R.id.but_schedule);
         mEdit0   = (EditText)findViewById(R.id.inputMeetingTitle);
         mEdit1 = (EditText)findViewById(R.id.inputLocation);
+
 
         mTimeBar = (TimeBar)findViewById(R.id.timeBar);
         TimeSlot slot = mTimeBar.getTimeSlot();
@@ -118,6 +148,7 @@ public class ScheduleEventActivity extends Activity implements TabListener{
             return;
         }
 
+
         LocalTime start_time = slot.getBeginTime();
         LocalTime end_time = slot.getEndTime();
 
@@ -125,6 +156,9 @@ public class ScheduleEventActivity extends Activity implements TabListener{
         int start_minute = start_time.getMinuteOfHour();
         int end_hour = end_time.getHourOfDay();
         int end_minute = end_time.getMinuteOfHour();
+
+        mStartTime.setText("Start Time: " + start_hour + ":" + start_minute);
+        mEndTime.setText("End Time: " + end_hour + ":" + end_minute);
 
         System.out.println("inputMeetingTitle: " + mEdit0.getText());
         System.out.println("inputLocation: " + mEdit1.getText());
