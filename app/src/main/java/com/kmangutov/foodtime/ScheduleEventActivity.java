@@ -110,50 +110,26 @@ public class ScheduleEventActivity extends Activity implements TabListener{
         mEdit1 = (EditText)findViewById(R.id.inputLocation);
 
         mTimeBar = (TimeBar)findViewById(R.id.timeBar);
-        TimeSlot slot;
-        int start_hour = 0;
-        int start_minute = 0;
-        int end_hour = 0;
-        int end_minute = 0;
-        if(mTimeBar.getTimeSlot()!=null)
-        {
-            slot = mTimeBar.getTimeSlot();
-            LocalTime start_time = slot.getBeginTime();
-            LocalTime end_time = slot.getEndTime();
-            if(start_time!=null)
-            {
-                start_hour = start_time.getHourOfDay();
-                start_minute = start_time.getMinuteOfHour();
-            }
-            else
-            {
-                System.out.println("start_time is null");
-            }
+        TimeSlot slot = mTimeBar.getTimeSlot();
 
-            if(end_time!=null)
-            {
-                end_hour = end_time.getHourOfDay();
-                end_minute = end_time.getMinuteOfHour();
-            }
-            else
-            {
-                System.out.println("end_time is null");
-            }
+        if(slot == null) {
 
-            System.out.println("inputMeetingTitle: " + mEdit0.getText().toString());
-            System.out.println("inputLocation: " + mEdit1.getText().toString());
-            System.out.println("Start Time: " + Integer.toString(start_hour) + ":" + Integer.toString(start_minute));
-            System.out.println("End Time: " + Integer.toString(end_hour) + ":" + Integer.toString(end_minute));
-        }
-        else
-        {
             Toast.makeText(this, "Invalid timeslot", Toast.LENGTH_LONG);
             return;
         }
 
+        LocalTime start_time = slot.getBeginTime();
+        LocalTime end_time = slot.getEndTime();
 
+        int start_hour = start_time.getHourOfDay();
+        int start_minute = start_time.getMinuteOfHour();
+        int end_hour = end_time.getHourOfDay();
+        int end_minute = end_time.getMinuteOfHour();
 
-
+        System.out.println("inputMeetingTitle: " + mEdit0.getText());
+        System.out.println("inputLocation: " + mEdit1.getText());
+        System.out.println("Start Time: " + start_hour + ":" + start_minute);
+        System.out.println("End Time: " + end_hour + ":" + end_minute);
 
         finish();
     }
