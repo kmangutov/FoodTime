@@ -369,6 +369,8 @@ public class TimeBar extends View {
                 selected = touchYFracToTimeSlot(yFrac);
 
                 if(selected == null) {
+                    if(mTimeSlots.size() >= 1)
+                        return true;
                     TimeSlot selectedSlot = new TimeSlot(yFrac, yFrac);
                     mTimeSlots.add(selectedSlot);
 
