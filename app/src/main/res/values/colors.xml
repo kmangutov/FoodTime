@@ -4,6 +4,6 @@
     <item name="color_foreground" type="color">#024e5e</item>
     <item name="color_foreground2" type="color">#035e72</item>
     <item name="color_background" type="color">#60B9CE</item>
-    <item name="color_button" type="color">#FF7F00</item>
+    <item name="color_button" type="color">#FF9340</item>
 
 </resources>
