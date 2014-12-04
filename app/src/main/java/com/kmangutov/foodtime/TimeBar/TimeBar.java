@@ -394,6 +394,8 @@ public class TimeBar extends View {
                     or both if middle is selected
                  */
 
+                if(selected == null)
+                    return true;
                 switch(selected.location)
                 {
                     case TOP:
