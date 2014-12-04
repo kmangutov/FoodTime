@@ -1,7 +1,7 @@
 Let’s Solve Lunch: CS 465 Group #17
 ===================================
 
-Andrew Borg, Xi Chen, Harrison Kiang, Kirill Mungatov, Jonathan Park, Isra Sunhachawi
+Andrew Borg, Xi Chen, Harrison Kiang, Kirill Mangutov, Jonathan Park, Isra Sunhachawi
 
 A Study in Mobile User Interface Design
 ---------------------------------------
