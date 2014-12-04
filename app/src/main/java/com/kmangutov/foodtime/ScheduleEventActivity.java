@@ -14,6 +14,12 @@ import java.util.Vector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.kmangutov.foodtime.TimeBar.TimeBar;
+import com.kmangutov.foodtime.TimeBar.TimeSlot;
+
+import org.joda.time.LocalTime;
 
 public class ScheduleEventActivity extends Activity implements TabListener{
 
@@ -25,6 +31,7 @@ public class ScheduleEventActivity extends Activity implements TabListener{
     Button mButton;
     EditText mEdit0;
     EditText mEdit1;
+    TimeBar mTimeBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +109,27 @@ public class ScheduleEventActivity extends Activity implements TabListener{
         mEdit0   = (EditText)findViewById(R.id.inputMeetingTitle);
         mEdit1 = (EditText)findViewById(R.id.inputLocation);
 
-        System.out.println("inputMeetingTitle: " + mEdit0.getText().toString());
-        System.out.println("inputLocation: " + mEdit1.getText().toString());
+        mTimeBar = (TimeBar)findViewById(R.id.timeBar);
+        TimeSlot slot = mTimeBar.getTimeSlot();
+
+        if(slot == null) {
+
+            Toast.makeText(this, "Invalid timeslot", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        LocalTime start_time = slot.getBeginTime();
+        LocalTime end_time = slot.getEndTime();
+
+        int start_hour = start_time.getHourOfDay();
+        int start_minute = start_time.getMinuteOfHour();
+        int end_hour = end_time.getHourOfDay();
+        int end_minute = end_time.getMinuteOfHour();
+
+        System.out.println("inputMeetingTitle: " + mEdit0.getText());
+        System.out.println("inputLocation: " + mEdit1.getText());
+        System.out.println("Start Time: " + start_hour + ":" + start_minute);
+        System.out.println("End Time: " + end_hour + ":" + end_minute);
 
         finish();
     }
