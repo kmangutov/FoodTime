@@ -131,8 +131,16 @@ public class ScheduleEventActivity extends Activity implements TabListener, Time
         int end_hour = end_time.getHourOfDay();
         int end_minute = end_time.getMinuteOfHour();
 
-        mStartTime.setText("Start Time: " + start_hour + ":" + start_minute);
-        mEndTime.setText("End Time: " + end_hour + ":" + end_minute);
+        start_hour = (start_hour == 12)?12:(start_hour % 12);;
+        end_hour = (end_hour == 12)?12:(end_hour % 12);
+
+        String start_minute_str = Integer.toString(start_minute);
+        start_minute_str = String.format("%02d", Integer.parseInt(start_minute_str));
+        String end_minute_str = Integer.toString(end_minute);
+        end_minute_str = String.format("%02d", Integer.parseInt(end_minute_str));
+
+        mStartTime.setText("Start Time: " + start_hour + ":" + start_minute_str);
+        mEndTime.setText("End Time: " + end_hour + ":" + end_minute_str);
     }
 
     //called when "Done" is pressed with id but_schedule
