@@ -28,6 +28,8 @@ public class TimeBar extends View {
     protected int fg2Color = 0;
     protected int bgColor = 0;
 
+    public TimeBarUpdateListener listener;
+
     public TimeBar(Context context) {
         super(context);
     }
@@ -401,6 +403,8 @@ public class TimeBar extends View {
                     or both if middle is selected
                  */
 
+
+
                 if(selected == null)
                     return true;
                 switch(selected.location)
@@ -418,6 +422,9 @@ public class TimeBar extends View {
                         System.out.println("MIDDLE SELECTED");
                         break;
                 }
+
+                if(listener != null)
+                    listener.timeBarUpdate();
                 //System.out.println("ACTION_MOVE");
                 break;
 

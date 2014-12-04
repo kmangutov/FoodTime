@@ -18,11 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kmangutov.foodtime.TimeBar.TimeBar;
+import com.kmangutov.foodtime.TimeBar.TimeBarUpdateListener;
 import com.kmangutov.foodtime.TimeBar.TimeSlot;
 
 import org.joda.time.LocalTime;
 
-public class ScheduleEventActivity extends Activity implements TabListener{
+public class ScheduleEventActivity extends Activity implements TabListener, TimeBarUpdateListener {
 
     Fragment f = null;
     InviteTabFragment tf = null;
@@ -92,6 +93,11 @@ public class ScheduleEventActivity extends Activity implements TabListener{
         System.out.println("Tab " + tab.getPosition());
 
         fragmentTransaction.replace(android.R.id.content, f);
+
+        try {
+            mTimeBar = (TimeBar) findViewById(R.id.timeBar);
+            mTimeBar.listener = this;
+        }catch(Exception e){}
     }
 
     @Override
@@ -105,7 +111,10 @@ public class ScheduleEventActivity extends Activity implements TabListener{
     }
 
     //update start time and end time TextView elements in fragment_time.xml
-    public void updateTimes(View v) {
+    public void timeBarUpdate() {
+
+
+
         mStartTime = (TextView)findViewById(R.id.start_time);
         mEndTime = (TextView)findViewById(R.id.end_time);
         mTimeBar = (TimeBar)findViewById(R.id.timeBar);
@@ -113,7 +122,8 @@ public class ScheduleEventActivity extends Activity implements TabListener{
 
         if(slot == null) {
 
-            Toast.makeText(this, "Invalid timeslot", Toast.LENGTH_LONG).show();
+            mStartTime.setText("Start Time");
+            mEndTime.setText("End Time");
             return;
         }
 
