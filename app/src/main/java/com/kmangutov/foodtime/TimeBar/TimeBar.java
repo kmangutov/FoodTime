@@ -98,12 +98,12 @@ public class TimeBar extends View {
         return new SlotSelection(slot, location);
     }
 
-    protected float timeToFraction(LocalTime time) {
+    protected static float timeToFraction(LocalTime time) {
 
         return time.getHourOfDay()/24.0f + time.getMinuteOfHour()/60.0f/24.0f;
     }
 
-    protected LocalTime fractionToTime(float fraction) {
+    protected static LocalTime fractionToTime(float fraction) {
 
         //prevents app from crashing for extreme upper and lower bounds
         if(fraction < 0)

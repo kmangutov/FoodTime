@@ -27,11 +27,11 @@ public class TimeSlot {
     public void setColor(int color) { this.color = color; }
 
     public LocalTime getBeginTime() {
-        return mBeginTime;
+        return TimeBar.fractionToTime(start);
     }
 
     public LocalTime getEndTime() {
-        return mEndTime;
+        return TimeBar.fractionToTime(end);
     }
 
     public void setBeginTime(LocalTime time) {
