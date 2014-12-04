@@ -93,11 +93,6 @@ public class ScheduleEventActivity extends Activity implements TabListener, Time
         System.out.println("Tab " + tab.getPosition());
 
         fragmentTransaction.replace(android.R.id.content, f);
-
-        try {
-            mTimeBar = (TimeBar) findViewById(R.id.timeBar);
-            mTimeBar.listener = this;
-        }catch(Exception e){}
     }
 
     @Override
