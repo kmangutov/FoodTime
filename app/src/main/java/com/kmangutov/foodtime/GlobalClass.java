@@ -3,7 +3,6 @@ package com.kmangutov.foodtime;
 import android.app.Application;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Sort of like a substitute DB for now.
@@ -13,11 +12,22 @@ public class GlobalClass extends Application {
     private ArrayList<User> userList = new ArrayList<User>();
     private ArrayList<User> friendList = new ArrayList<User>();
     private  ArrayList<Event> eventList = new ArrayList<Event>();
+    private  ArrayList<Event> pendingEventList = new ArrayList<Event>();
 
 
     //Simple initialize just for testing
     public GlobalClass(){
-        Event event1 = new Event("Domino Lunch", "Domino" );
+        //Generate fake pre-existing user db (temporary)
+        if (userList.isEmpty()) {
+            userList.add(new User("test", "test", "Jon", "Behind You, IL"));
+            userList.add(new User("test1", "test", "Borg", "Urbana, IL"));
+            userList.add(new User("test2", "test", "Harrison", "Champaign, IL"));
+            userList.add(new User("smthn1", "pass", "Kirill", "Urbana, IL"));
+            userList.add(new User("florida", "pass", "Isra", "FLORIDAAAAAA"));
+            userList.add(new User("something2", "pass", "Xi", "Champaign, IL"));
+        }
+
+        /*Event event1 = new Event("Domino Lunch", "Domino" );
         Event event2 = new Event("Evo Lunch", "Evo" );
 
         User friend1 = new User("Kirill");
@@ -35,13 +45,9 @@ public class GlobalClass extends Application {
         acceptedFriends2.add(friend4);
         acceptedFriends2.add(friend1);
 
-        //Calendar startTime =   new Calendar() ;
-
-
-
         event1.setAcceptedFriends(acceptedFriends1);
         eventList.add(event1);
-        eventList.add(event2);
+        eventList.add(event2);*/
     }
 
     public void setEventList(ArrayList<Event> eventList) {

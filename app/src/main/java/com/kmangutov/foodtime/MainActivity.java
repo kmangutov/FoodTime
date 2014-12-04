@@ -3,8 +3,7 @@ package com.kmangutov.foodtime;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +20,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.login_activity);
         setContentView(R.layout.login_activity);
+
+
 
         //input_start_time = (EditText) findViewById(R.id.inputStartTime);
         //input_end_time = (EditText) findViewById(R.id.inputEndTime);
@@ -184,51 +185,32 @@ public class MainActivity extends Activity {
         {
             //String output="";
             String password = password_input.getText().toString();
-
-
             String username = username_input.getText().toString();
 
-            /*
+            /* SQL query sample
             String sRequest = "http://web.engr.illinois.edu/~null_ptrs/bpoints/user_table/get_user.php?username="+ username +"&password="+ password;
             Log.w("sRequest", sRequest);
             output = Process_request.runProcess(sRequest);
             */
 
-            if(!username_input.equals("")&&!password_input.equals(""))
-            {
-                //set_user(username, password);
+            GlobalClass vars = (GlobalClass) getApplicationContext();
+            ArrayList<User> userList = vars.getUserList();
 
-                //Generate fake user db and friendlist (temporary)
-                GlobalClass vars = (GlobalClass) getApplicationContext();
-                vars.getFriendList().clear();
-                vars.getUserList().clear();
+            Log.w("debug", "ATTEMPTING LOGIN"+userList.size());
 
-                ArrayList<User> userList = vars.getUserList();
-                userList.add(new User("smthn4","Jon", "Urbana, IL"));
-                userList.add(new User("smthn5","Borg", "Urbana, IL"));
-                userList.add(new User("smthn6","Harrison", "Champaign, IL"));
-                userList.add(new User("smthn","Kirill", "Urbana, IL"));
-                userList.add(new User("smthn2","Isra", "FLORIDAAAAAA"));
-                userList.add(new User("smthn3","Xi", "Champaign, IL"));
-
-                ArrayList<User> friendList = vars.getFriendList();
-                int i= 3;
-                while(i<userList.size()) {
-                    friendList.add(userList.get(i));
-                    ++i;
+            for(int i=0; i<userList.size(); ++i) {
+                Log.w("debug", userList.get(i).username +","+ userList.get(i).checkPassword(password));
+                if (userList.get(i).username.compareTo(username)==0 && userList.get(i).checkPassword(password)) {
+                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    return;
                 }
-
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
-            }
-            else
-            {
-                Toast.makeText(this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
             }
 
+            Toast.makeText(this, "Invalid Username and/or Password", Toast.LENGTH_SHORT).show();
 
         }
         else
-            Toast.makeText(this, "Error logging in", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in the Username and Password field.", Toast.LENGTH_SHORT).show();
     }
 
     public void new_user_button(View v) {
