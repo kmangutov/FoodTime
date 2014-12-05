@@ -9,6 +9,7 @@
         style="@style/style_text.big"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/screen_top_margin"
         android:text=" Sakari Sushi"        android:fontFamily="sans-serif"
         android:id="@+id/textEventName"
         android:editable="false"/>
@@ -27,7 +28,7 @@
             android:layout_marginLeft="5dp"
             android:id="@+id/imageCalendar"
             android:src="@drawable/calendar_icon"
-            android:layout_marginTop="2dp"/>
+            android:layout_marginTop="4dp"/>
         <TextView
             style="@style/style_text"
             android:layout_width="wrap_content"
@@ -54,11 +55,11 @@
             android:layout_height="wrap_content"
             android:text="204 E Green St, 61820"
             android:ems="14"
-            android:textSize="15dp"
             android:layout_toRightOf="@id/imageLocation"
             android:id="@+id/textLocation"
             android:layout_below="@id/textTime"
-            android:layout_alignLeft="@id/textTime"/>
+            android:layout_alignLeft="@id/textTime"
+            android:layout_alignTop="@id/imageLocation"/>
 
 
         <ImageView

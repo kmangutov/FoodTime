@@ -8,7 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +19,7 @@ import java.util.ArrayList;
  */
 
 public class AcceptedEventViewActivity extends Activity {
-
+    Format formatter = new SimpleDateFormat("EEE hh:mm aaa");
     ArrayList<User> friendAcceptedList = new ArrayList<User>();
     ArrayList<User> friendNoList = new ArrayList<User>();
     ArrayList<String> friendAcceptedListStr = new ArrayList<String>();
@@ -63,8 +66,9 @@ public class AcceptedEventViewActivity extends Activity {
         //friendNoList.addAll(Arrays.asList(name_no));
 
 
-        //((TextView) findViewById(R.id.textEventName)).setText(intent.getStringExtra("passed_eventname"));
-        //( (TextView) findViewById(R.id.textLocation)).setText(intent.getStringExtra("passed_eventname" )+ ", 204 E Green St, 61820");
+        ((TextView) findViewById(R.id.textEventName)).setText(event.getTitle());
+        ((TextView) findViewById(R.id.textTime)).setText(formatter.format(event.getStartTime()));
+        ( (TextView) findViewById(R.id.textLocation)).setText(event.getLocation());//+ ", 204 E Green St, 61820");
     }
 
 

@@ -59,7 +59,7 @@ public class GlobalClass extends Application {
         invitedFriends.add(userList.get(4));
         invitedFriends.add(userList.get(5));
 
-        Event event1 = new Event("Papa Johns Dinner", "Papa Johns" , date, date2, invitedFriends, acceptedFriends);
+        //Event event1 = new Event("Papa Johns Dinner", "Papa Johns" , date, date2, invitedFriends, acceptedFriends);
 
         str1 = "2014.December.31 11:50 AM";
         str2 = "2014.December.31 1:00 PM";
@@ -80,10 +80,10 @@ public class GlobalClass extends Application {
         invitedFriends.add(userList.get(4));
         invitedFriends.add(userList.get(5));
 
-        Event event2 = new Event("#FREELUNCH", "Sakari Sushi", date, date2, invitedFriends, acceptedFriends);
+        //Event event2 = new Event("#FREELUNCH", "Sakari Sushi", date, date2, invitedFriends, acceptedFriends);
 
-        eventList.add(event1);
-        eventList.add(event2);
+        //eventList.add(event1);
+       // eventList.add(event2);
     }
 
     public void setEventList(ArrayList<Event> eventList) {
