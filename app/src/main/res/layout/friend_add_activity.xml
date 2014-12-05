@@ -27,8 +27,9 @@
                 style="@style/button_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Add to Friend List "
+                android:text=" Add "
                 android:layout_alignParentRight="true"
+                android:width="140dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="4dp"
                 android:layout_alignParentBottom="true"
@@ -60,18 +61,20 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/edit_addbyid"
                     android:inputType="text"
-                    android:minWidth="220sp"
+                    android:minWidth="200sp"
                     android:textSize="@dimen/regular_text_size"
                     android:textIsSelectable="true"/>
             <Button
-                    android:layout_width="fill_parent"
+                    style="@style/button_style"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#bb93dc"
                     android:text="Find and Add"
                     android:onClick="addSingle"
-                    android:layout_alignLeft = "@id/but_addlist"
+                    android:layout_marginLeft="38dp"
+                    android:layout_alignRight= "@id/but_addlist"
                     android:layout_marginRight="10dp"
-                    android:id="@+id/but_addsingle" android:textSize="@dimen/regular_text_size"/>
+                    android:width="140dp"
+                    android:id="@+id/but_addsingle" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
