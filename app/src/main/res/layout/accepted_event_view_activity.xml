@@ -89,6 +89,7 @@
             android:layout_weight="0.4"
             android:layout_toRightOf="@id/imageYes"
             android:layout_below="@id/imageYes"
+            android:textColor="@color/color_foreground"
             android:id="@+id/listViewYes"
             android:drawSelectorOnTop="false" />
 
@@ -120,6 +121,8 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="0.4"
+            android:textColor="@color/color_foreground"
+
             android:layout_below="@id/imageNo"
             android:layout_toRightOf="@id/imageNo"
             android:id="@+id/listViewNo"
