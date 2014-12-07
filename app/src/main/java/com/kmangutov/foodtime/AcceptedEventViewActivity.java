@@ -55,13 +55,13 @@ public class AcceptedEventViewActivity extends Activity {
 
         ListView myListView1 = (ListView)findViewById(R.id.listViewYes);
         final ArrayAdapter adapter1 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, friendAcceptedListStr);
+                R.layout.list_text_white,  R.id.list_item, friendAcceptedListStr);
         myListView1.setAdapter(adapter1);
         //friendAcceptedList.addAll(Arrays.asList(name_accepted));
 
         ListView myListView2 = (ListView)findViewById(R.id.listViewNo);
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, friendNoListStr);
+               R.layout.list_text_white,  R.id.list_item, friendNoListStr);
         myListView2.setAdapter(adapter2);
         //friendNoList.addAll(Arrays.asList(name_no));
 

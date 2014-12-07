@@ -6,6 +6,7 @@ import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -220,6 +221,11 @@ public class ScheduleEventActivity extends Activity implements TabListener, Time
         ((GlobalClass)getApplicationContext()).unsetAll();
 
         finish();
+    }
+
+    public void add_friend_button(View v){
+        startActivity(new Intent(ScheduleEventActivity.this, FriendAddActivity.class));
+
     }
 
 }

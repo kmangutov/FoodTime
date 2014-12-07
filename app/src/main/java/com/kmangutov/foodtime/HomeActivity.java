@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class HomeActivity extends Activity {
         }
 
         invitedList = (ListView) findViewById(R.id.invited_list);
-        invitedArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, invitedArray);
+        invitedArrayAdapter = new ArrayAdapter(this, R.layout.list_text_white,  R.id.list_item, invitedArray);
         invitedList.setAdapter(invitedArrayAdapter);
         invitedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,7 +68,7 @@ public class HomeActivity extends Activity {
         });
 
         acceptedList = (ListView) findViewById(R.id.accepted_list);
-        acceptedArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, acceptedArray);
+        acceptedArrayAdapter = new ArrayAdapter(this,  R.layout.list_text_white,  R.id.list_item, acceptedArray);
         acceptedList.setAdapter(acceptedArrayAdapter);
 
         acceptedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,8 +111,14 @@ public class HomeActivity extends Activity {
     }
 
     public void scheduleMeeting(View v){
-
-        startActivity(new Intent(HomeActivity.this, ScheduleEventActivity.class));
+        GlobalClass vars = (GlobalClass) getApplicationContext();
+        User me = vars.getUser();
+        if(me.friendList.isEmpty()){
+            startActivity(new Intent(HomeActivity.this, FriendActivity.class));
+        }
+        else {
+            startActivity(new Intent(HomeActivity.this, ScheduleEventActivity.class));
+        }
     }
 
 }

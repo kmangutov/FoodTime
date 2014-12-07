@@ -1,6 +1,7 @@
 package com.kmangutov.foodtime;
 
 import android.app.Activity;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +26,8 @@ public class FriendActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_activity);
-
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle("Add Friends");
         showListView();
         removeButton();
         /*
